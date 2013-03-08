@@ -1,15 +1,17 @@
 package com.example.stocks.core;
 
+import com.example.stocks.infrastructure.MarketData;
+import com.example.stocks.util.Date;
+
 public class Stock {
 
-    private String symbol;
+    private Symbol symbol;
 
-    public Stock(String symbol) {
+    public Stock(Symbol symbol) {
         this.symbol = symbol;
     }
 
-
-    public String getSymbol() {
-        return symbol;
+    public StockQuote getQuote(MarketData marketData, Date now) {
+        return marketData.getQuote(symbol, now);
     }
 }

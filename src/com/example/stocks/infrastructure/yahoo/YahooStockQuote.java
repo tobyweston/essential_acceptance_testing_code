@@ -1,16 +1,19 @@
 package com.example.stocks.infrastructure.yahoo;
 
+import com.example.stocks.core.Price;
+import com.example.stocks.core.StockQuote;
 import com.example.stocks.util.Json;
 
-public class YahooStockQuote implements YahooResponse {
+public class YahooStockQuote implements StockQuote {
 
     private final Json quote;
 
-    public YahooStockQuote(Json json) {
-        this.quote = json.getObject("query").getObject("results").getObject("quote");
+    public YahooStockQuote(String json) {
+        this.quote = new Json(json).getObject("query").getObject("results").getObject("quote");
     }
 
-    public String getClosingPrice() {
-        return quote.getString("Close");
+    @Override
+    public Price getClosingPrice() {
+        return new Price(quote.getString("Close"));
     }
 }

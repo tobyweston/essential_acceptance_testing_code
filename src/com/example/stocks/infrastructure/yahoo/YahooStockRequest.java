@@ -1,27 +1,26 @@
 package com.example.stocks.infrastructure.yahoo;
 
+import com.example.stocks.core.StockQuote;
+import com.example.stocks.core.Symbol;
 import com.example.stocks.util.Date;
-import com.example.stocks.util.Json;
 
-import static com.example.stocks.infrastructure.yahoo.YahooResponseFormat.*;
 import static java.text.MessageFormat.format;
 
-public class YahooStockPriceRequest implements YahooRequest {
+public class YahooStockRequest {
 
     private static String queryTemplate = "select * from yahoo.finance.historicaldata where symbol = \"{0}\" and startDate = \"{1}\" and endDate = \"{1}\"";
 
-    private String stockSymbol;
+    private Symbol stockSymbol;
     private Date date;
 
-    public YahooStockPriceRequest(String stockSymbol, Date date) {
-        this.stockSymbol = stockSymbol;
+    public YahooStockRequest(Symbol symbol, Date date) {
+        this.stockSymbol = symbol;
         this.date = date;
     }
 
-    @Override
-    public YahooStockQuote executeWith(Yahoo yahoo) {
+    public StockQuote sendTo(Yahoo yahoo) {
         YahooDateFormatter formatter = new YahooDateFormatter();
         String query = format(queryTemplate, stockSymbol, date.format(formatter));
-        return new YahooStockQuote(new Json(yahoo.executeQuery(query, JSON)));
+        return new YahooStockQuote(yahoo.executeQuery(query));
     }
 }

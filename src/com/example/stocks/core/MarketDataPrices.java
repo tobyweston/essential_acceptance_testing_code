@@ -15,6 +15,6 @@ public class MarketDataPrices implements Prices {
 
     @Override
     public Price getLatest(Stock stock) {
-        return marketData.priceFor(stock, clock.now());
+        return stock.getQuote(marketData, clock.now()).getClosingPrice();
     }
 }

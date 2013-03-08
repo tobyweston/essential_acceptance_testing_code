@@ -22,16 +22,25 @@ public class MarketDataPricesTest {
     @Test
     public void retrievesPriceFromMarketDataSource() throws Exception {
         final Date now = new Date(2013, 3, 1);
-        final Stock stock = new Stock("AAPL");
-        final Price price = new Price(0);
+        final Symbol symbol = new Symbol("AAPL");
+        final Stock stock = new Stock(symbol);
+        final StockQuote quote = new StubStockQuote();
+
 
         MarketDataPrices prices = new MarketDataPrices(clock, marketData);
 
         context.checking(new Expectations() {{
             oneOf(clock).now(); will(returnValue(now));
-            oneOf(marketData).priceFor(stock, now); will(returnValue(price));
+            oneOf(marketData).getQuote(symbol, now); will(returnValue(quote));
         }});
 
-        assertThat(prices.getLatest(stock), is(price));
+        assertThat(prices.getLatest(stock), is(quote.getClosingPrice()));
+    }
+
+    private static class StubStockQuote implements StockQuote {
+        @Override
+        public Price getClosingPrice() {
+            return new Price(0);
+        }
     }
 }
