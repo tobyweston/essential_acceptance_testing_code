@@ -4,7 +4,7 @@ import com.example.stocks.infrastructure.Configuration;
 
 public class HttpClientFactory {
 
-    private Configuration configuration;
+    private final Configuration configuration;
 
     public HttpClientFactory(Configuration configuration) {
         this.configuration = configuration;

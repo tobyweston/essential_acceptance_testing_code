@@ -3,11 +3,12 @@ package com.example.stocks.core;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.example.stocks.core.ExampleStocks.*;
+import static com.example.stocks.core.ExampleStocks.Amazon;
+import static com.example.stocks.core.ExampleStocks.Apple;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class PortfolioTest {
+public class VersionTest {
 
     private StubBook book = new StubBook();
     private StubMarketData marketData = new StubMarketData();
