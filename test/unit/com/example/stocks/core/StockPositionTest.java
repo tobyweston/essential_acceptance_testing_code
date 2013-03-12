@@ -17,7 +17,7 @@ public class StockPositionTest {
     @Mock MarketData marketData;
 
     @Test
-    public void usesMarketDataToValueStock() throws Exception {
+    public void valuesPositionWithMarketData() throws Exception {
         context.checking(new Expectations() {{
             oneOf(marketData).getPrice(Apple); will(returnValue(new Money(7)));
         }});

@@ -24,16 +24,16 @@ public class YahooMarketDataIntegrationTest {
      */
 
     @Test
-    public void retrievesStockPriceFromYahoo() throws Exception {
+    public void requestsStockPriceFromYahoo() throws Exception {
         Symbol symbol = Apple;
         Clock clock = new FrozenClock(new Date(2013, 3, 1));
         Money expectedPrice = new Money("430.47");
 
         HttpClient client = new HttpClientFactory(new SystemConfiguration()).createClient();
         Yahoo yahoo = new YqlWebService(client);
-        YahooMarketData marketDate = new YahooMarketData(yahoo, clock);
+        YahooMarketData marketData = new YahooMarketData(yahoo, clock);
 
-        assertThat(marketDate.getPrice(symbol), is(expectedPrice));
+        assertThat(marketData.getPrice(symbol), is(expectedPrice));
     }
 
 }

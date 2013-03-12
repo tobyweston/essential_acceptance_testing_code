@@ -10,17 +10,17 @@ public class JsonTest {
     private Json json = new Json("{\"name\": {\"firstName\": \"Pat\", \"surname\": \"Clifton\"}, \"age\": 32, \"occupation\": \"Postman\"}");
 
     @Test
-    public void canAccessStrings() throws Exception {
+    public void accessesStringValues() throws Exception {
         assertThat(json.getString("occupation"), is("Postman"));
     }
 
     @Test
-    public void canAccessLongs() throws Exception {
+    public void accessesLongValues() throws Exception {
         assertThat(json.getLong("age"), is(32l));
     }
 
     @Test
-    public void canAccessNestedObjects() throws Exception {
+    public void accessesNestedObjects() throws Exception {
         assertThat(json.getObject("name").getString("surname"), is("Clifton"));
     }
 
