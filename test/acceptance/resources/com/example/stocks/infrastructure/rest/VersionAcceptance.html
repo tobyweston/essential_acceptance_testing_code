@@ -1,0 +1,29 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+    <title>Get Version via REST</title>
+    <link rel="stylesheet" href="../../../../../concordion.css" type="text/css"/>
+</head>
+<body>
+<h1>Get Version via REST</h1>
+
+<h2>Given</h2>
+
+<p>
+    The application is running,
+</p>
+
+<h2>When</h2>
+
+<p>
+    A HTTP <code>GET</code> request is made to the <code concordion:set="#url">/version</code> URL,
+</p>
+
+<h2>Then</h2>
+
+<p>
+    The response body includes the following
+</p>
+<pre concordion:assertEquals="getVersion(#url)">1.0</pre>
+
+</body>
+</html>
