@@ -3,6 +3,7 @@ package com.example.stocks.core;
 import java.math.BigDecimal;
 
 public class Money {
+
     private final BigDecimal amount;
 
     public Money(String amount) {
