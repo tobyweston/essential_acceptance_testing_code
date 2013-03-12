@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.is;
 public class GreedyReaderTest {
 
     @Test
-    public void returnsFullContentsOfReaderAsString() throws Exception {
+    public void returnsFullContentsOfReader() throws Exception {
         String contents = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
         StringReader input = new StringReader(contents);
         assertThat(new GreedyReader(input).readAll(), is(contents));
