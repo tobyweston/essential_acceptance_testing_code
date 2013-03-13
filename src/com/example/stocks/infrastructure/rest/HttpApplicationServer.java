@@ -14,7 +14,7 @@ public class HttpApplicationServer implements HttpServer {
 
     @Override
     public void start() {
-        Application application = ApplicationBuilder.application().addAnnotated(Version.class).build();
+        Application application = ApplicationBuilder.application().addAnnotated(Version.class).addAnnotated(Portfolio.class).build();
         ServerConfiguration configuration = ServerConfiguration.defaultConfiguration().port(8000);
         try {
             server = new RestServer(application, configuration);

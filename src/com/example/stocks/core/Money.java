@@ -37,4 +37,9 @@ public class Money {
     public int hashCode() {
         return amount.hashCode();
     }
+
+    @Override
+    public String toString() {
+        return amount.toPlainString();
+    }
 }
