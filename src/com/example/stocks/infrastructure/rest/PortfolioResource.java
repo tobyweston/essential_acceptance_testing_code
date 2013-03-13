@@ -9,15 +9,6 @@ public class PortfolioResource {
 
     private final Valuation valuation;
 
-//    public PortfolioResource() {
-//        this.valuation = new Valuation() {
-//            @Override
-//            public Money value() {
-//                return new Money(-1);
-//            }
-//        };
-//    }
-
     public PortfolioResource(Valuation valuation) {
         this.valuation = valuation;
     }
