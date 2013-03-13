@@ -1,6 +1,6 @@
 package com.example.stocks.infrastructure.rest;
 
-import com.example.stocks.infrastructure.http.HttpServer;
+import com.example.stocks.infrastructure.server.Server;
 import com.googlecode.utterlyidle.Application;
 import com.googlecode.utterlyidle.ApplicationBuilder;
 import com.googlecode.utterlyidle.ServerConfiguration;
@@ -8,7 +8,7 @@ import com.googlecode.utterlyidle.httpserver.RestServer;
 
 import java.io.IOException;
 
-public class HttpApplicationServer implements HttpServer {
+public class HttpApplicationServer implements Server {
 
     private RestServer server;
 
@@ -32,7 +32,4 @@ public class HttpApplicationServer implements HttpServer {
         }
     }
 
-    public static void main(String[] args) {
-        new HttpApplicationServer().start();
-    }
 }

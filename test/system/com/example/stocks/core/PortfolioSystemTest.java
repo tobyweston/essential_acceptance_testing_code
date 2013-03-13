@@ -3,8 +3,7 @@ package com.example.stocks.core;
 import com.example.stocks.infrastructure.SystemConfiguration;
 import com.example.stocks.infrastructure.http.HttpClient;
 import com.example.stocks.infrastructure.http.HttpClientFactory;
-import com.example.stocks.infrastructure.http.HttpServer;
-import com.example.stocks.infrastructure.rest.HttpApplicationServer;
+import com.example.stocks.infrastructure.server.Server;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,16 +11,17 @@ import org.junit.Test;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static com.example.stocks.infrastructure.server.Application.ApplicationBuilder;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class PortfolioSystemTest {
 
-    private final HttpServer server = new HttpApplicationServer();
+    private final Server application = new ApplicationBuilder().build();
 
     @Before
     public void startServer() {
-        server.start();
+        application.start();
     }
 
     @Test
@@ -33,7 +33,7 @@ public class PortfolioSystemTest {
 
     @After
     public void stopServer() {
-        server.stop();
+        application.stop();
     }
 
 }

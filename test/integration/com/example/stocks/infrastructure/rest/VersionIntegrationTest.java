@@ -3,7 +3,7 @@ package com.example.stocks.infrastructure.rest;
 import com.example.stocks.infrastructure.SystemConfiguration;
 import com.example.stocks.infrastructure.http.HttpClient;
 import com.example.stocks.infrastructure.http.HttpClientFactory;
-import com.example.stocks.infrastructure.http.HttpServer;
+import com.example.stocks.infrastructure.server.Server;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class VersionIntegrationTest {
 
-    private final HttpServer server = new HttpApplicationServer();
+    private final Server server = new HttpApplicationServer();
 
     @Before
     public void startServer() {

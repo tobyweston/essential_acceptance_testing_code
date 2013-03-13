@@ -25,7 +25,7 @@ public class YqlWebService implements Yahoo {
 
     private URL urlFor(String yql) {
         try {
-            return new URL(format(urlTemplate, encode(yql)));
+            return new URL(format(urlTemplate, encode(yql, "UTF-8")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
