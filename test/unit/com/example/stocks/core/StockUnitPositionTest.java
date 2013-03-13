@@ -10,7 +10,7 @@ import static com.example.stocks.core.ExampleStocks.Apple;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class StockPositionTest {
+public class StockUnitPositionTest {
 
     @Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
 
@@ -22,7 +22,7 @@ public class StockPositionTest {
             oneOf(marketData).getPrice(Apple); will(returnValue(new Money(7)));
         }});
 
-        assertThat(new StockPosition(Apple, 9).value(marketData), is(new Money(63)));
+        assertThat(new StockUnitPosition(Apple, 9).value(marketData), is(new Money(63)));
     }
 
 }

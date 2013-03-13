@@ -13,7 +13,7 @@ public class StubBook implements Book {
     }
 
     public StubBook add(Symbol symbol) {
-        positions.add(new StubPosition(symbol));
+        positions.add(new StockNotionalPosition(symbol));
         return this;
     }
 

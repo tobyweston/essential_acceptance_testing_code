@@ -1,10 +1,10 @@
 package com.example.stocks.core;
 
-public class StubPosition implements Position {
+public class StockNotionalPosition implements Position {
 
     private Symbol symbol;
 
-    public StubPosition(Symbol symbol) {
+    public StockNotionalPosition(Symbol symbol) {
         this.symbol = symbol;
     }
 
