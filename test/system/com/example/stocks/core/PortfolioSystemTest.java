@@ -38,7 +38,7 @@ public class PortfolioSystemTest {
     public void valuation() throws MalformedURLException {
         HttpClient http = new HttpClientFactory(new SystemConfiguration()).createClient();
         String response = http.get(new URL("http://localhost:8000/portfolio/0001"));
-        assertThat(response, is("720.00"));
+        assertThat(response, is("720"));
     }
 
     @After

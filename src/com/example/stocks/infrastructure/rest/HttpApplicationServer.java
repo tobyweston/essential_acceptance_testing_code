@@ -1,6 +1,6 @@
 package com.example.stocks.infrastructure.rest;
 
-import com.example.stocks.core.Portfolio;
+import com.example.stocks.core.Valuation;
 import com.example.stocks.infrastructure.server.PortfolioBuilder;
 import com.example.stocks.infrastructure.server.Server;
 import com.googlecode.utterlyidle.Application;
@@ -61,7 +61,7 @@ public class HttpApplicationServer implements Server {
 
         @Override
         public Container addPerApplicationObjects(Container container) throws Exception {
-            return container.addInstance(Portfolio.class, portfolio.build());
+            return container.addInstance(Valuation.class, portfolio.build());
         }
     }
 }
