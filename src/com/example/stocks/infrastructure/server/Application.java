@@ -7,10 +7,10 @@ public class Application implements Server {
     private final HttpApplicationServer server;
 
     public static Application productionConfiguration() {
-        return new ApplicationBuilder().build();
+        return ApplicationBuilder.defaultApplication().build();
     }
 
-    private Application(HttpApplicationServer server) {
+    Application(HttpApplicationServer server) {
         this.server = server;
     }
 
@@ -28,12 +28,4 @@ public class Application implements Server {
         productionConfiguration().start();
     }
 
-    public static class ApplicationBuilder {
-
-        private HttpApplicationServer server = new HttpApplicationServer();
-
-        public Application build() {
-            return new Application(server);
-        }
-    }
 }

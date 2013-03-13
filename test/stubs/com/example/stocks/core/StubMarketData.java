@@ -10,8 +10,9 @@ public class StubMarketData implements MarketData {
         this.data = new HashMap<Symbol, Money>();
     }
 
-    public void add(Symbol symbol, Money price) {
+    public StubMarketData add(Symbol symbol, Money price) {
         this.data.put(symbol, price);
+        return this;
     }
 
     @Override

@@ -1,25 +1,24 @@
 package com.example.stocks.infrastructure.rest;
 
-import com.example.stocks.core.Money;
 import com.example.stocks.core.Valuation;
 import com.googlecode.utterlyidle.annotations.GET;
 import com.googlecode.utterlyidle.annotations.Path;
 import com.googlecode.utterlyidle.annotations.PathParam;
 
-public class Portfolio {
+public class PortfolioResource {
 
     private final Valuation valuation;
 
-    public Portfolio() {
-        this.valuation = new Valuation() {
-            @Override
-            public Money value() {
-                return new Money(0);
-            }
-        };
-    }
+//    public PortfolioResource() {
+//        this.valuation = new Valuation() {
+//            @Override
+//            public Money value() {
+//                return new Money(-1);
+//            }
+//        };
+//    }
 
-    public Portfolio(Valuation valuation) {
+    public PortfolioResource(Valuation valuation) {
         this.valuation = valuation;
     }
 

@@ -3,6 +3,7 @@ package com.example.stocks.infrastructure.rest;
 import com.example.stocks.infrastructure.SystemConfiguration;
 import com.example.stocks.infrastructure.http.HttpClient;
 import com.example.stocks.infrastructure.http.HttpClientFactory;
+import com.example.stocks.infrastructure.server.ApplicationBuilder;
 import com.example.stocks.infrastructure.server.Server;
 import org.concordion.api.ExpectedToPass;
 import org.concordion.integration.junit4.ConcordionRunner;
@@ -17,7 +18,7 @@ import java.net.URL;
 @ExpectedToPass
 public class VersionAcceptanceTest {
 
-    private final Server server = new HttpApplicationServer();
+    private final Server server = ApplicationBuilder.defaultApplication().build();
 
     @Before
     public void startServer() {

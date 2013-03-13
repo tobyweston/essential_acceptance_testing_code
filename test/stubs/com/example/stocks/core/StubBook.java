@@ -12,8 +12,9 @@ public class StubBook implements Book {
         this.positions = new ArrayList<Position>();
     }
 
-    public void add(Symbol symbol) {
+    public StubBook add(Symbol symbol) {
         positions.add(new StubPosition(symbol));
+        return this;
     }
 
     @Override
