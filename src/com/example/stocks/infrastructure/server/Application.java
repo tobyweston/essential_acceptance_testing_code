@@ -24,7 +24,7 @@ public class Application implements Server {
 
     public static Application productionConfiguration() {
         HttpClient http = new HttpClientFactory(new SystemConfiguration()).createClient();
-        PortfolioBuilder portfolio = defaultPortfolio().with(new OneAmazonShare()).with(new YahooMarketData(new YqlWebService(http), new RealClock()));
+        PortfolioBuilder portfolio = defaultPortfolio().with(new BookOfOneAmazonShare()).with(new YahooMarketData(new YqlWebService(http), new RealClock()));
         HttpApplicationServerBuilder httpServer = defaultHttpServer().with(portfolio);
         return defaultApplication().with(httpServer).build();
     }
@@ -60,7 +60,7 @@ public class Application implements Server {
         }
     }
 
-    private static class OneAmazonShare implements Book {
+    private static class BookOfOneAmazonShare implements Book {
         @Override
         public Iterator<Position> iterator() {
             return new ArrayList<Position>() {{
