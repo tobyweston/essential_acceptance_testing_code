@@ -1,10 +1,15 @@
 package com.example.stocks.infrastructure.http;
 
 import com.example.stocks.infrastructure.Configuration;
+import com.example.stocks.infrastructure.SystemConfiguration;
 
 public class HttpClientFactory {
 
     private final Configuration configuration;
+
+    public static HttpClient defaultHttpClient() {
+        return new HttpClientFactory(new SystemConfiguration()).createClient();
+    }
 
     public HttpClientFactory(Configuration configuration) {
         this.configuration = configuration;

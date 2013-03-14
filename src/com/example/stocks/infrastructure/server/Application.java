@@ -14,7 +14,7 @@ import com.example.stocks.util.RealClock;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import static com.example.stocks.infrastructure.server.ApplicationBuilder.*;
+import static com.example.stocks.infrastructure.server.ApplicationBuilder.defaultApplication;
 import static com.example.stocks.infrastructure.server.HttpApplicationServerBuilder.defaultHttpServer;
 import static com.example.stocks.infrastructure.server.PortfolioBuilder.defaultPortfolio;
 
@@ -24,7 +24,7 @@ public class Application implements Server {
 
     public static Application productionConfiguration() {
         HttpClient http = new HttpClientFactory(new SystemConfiguration()).createClient();
-        PortfolioBuilder portfolio = defaultPortfolio().with(new CannedBook()).with(new YahooMarketData(new YqlWebService(http), new RealClock()));
+        PortfolioBuilder portfolio = defaultPortfolio().with(new OneAmazonShare()).with(new YahooMarketData(new YqlWebService(http), new RealClock()));
         HttpApplicationServerBuilder httpServer = defaultHttpServer().with(portfolio);
         return defaultApplication().with(httpServer).build();
     }
@@ -60,12 +60,11 @@ public class Application implements Server {
         }
     }
 
-    private static class CannedBook implements Book {
+    private static class OneAmazonShare implements Book {
         @Override
         public Iterator<Position> iterator() {
             return new ArrayList<Position>() {{
-                add(new StockUnitPosition(new Symbol("AMZN"), 100));
-                add(new StockUnitPosition(new Symbol("GOOG"), 100));
+                add(new StockUnitPosition(new Symbol("AMZN"), 1));
             }}.iterator();
         }
     }
