@@ -1,8 +1,8 @@
 package com.example.stocks.infrastructure.server;
 
 import com.example.stocks.core.Book;
+import com.example.stocks.core.NumberOfStocks;
 import com.example.stocks.core.Position;
-import com.example.stocks.core.StockUnitPosition;
 import com.example.stocks.infrastructure.SystemConfiguration;
 import com.example.stocks.infrastructure.http.HttpClient;
 import com.example.stocks.infrastructure.http.HttpClientFactory;
@@ -64,7 +64,7 @@ public class Application implements Server {
         @Override
         public Iterator<Position> iterator() {
             return new ArrayList<Position>() {{
-                add(new StockUnitPosition(new Symbol("AMZN"), 1));
+                add(new NumberOfStocks(new Symbol("AMZN"), 1));
             }}.iterator();
         }
     }
