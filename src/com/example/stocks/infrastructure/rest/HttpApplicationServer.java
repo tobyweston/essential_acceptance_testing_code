@@ -19,6 +19,8 @@ import static com.googlecode.utterlyidle.annotations.AnnotatedBindings.annotated
 
 public class HttpApplicationServer implements Server {
 
+    public static final Integer port = 8000;
+
     private RestServer server;
     private PortfolioBuilder portfolio;
 
@@ -28,8 +30,8 @@ public class HttpApplicationServer implements Server {
 
     @Override
     public void start() {
-        Application application = ApplicationBuilder.application().add(new PortfolioFeature(portfolio)).addAnnotated(Version.class).build();
-        ServerConfiguration configuration = defaultConfiguration().port(8000);
+        Application application = ApplicationBuilder.application().add(new ValuationFeature(portfolio)).addAnnotated(Version.class).build();
+        ServerConfiguration configuration = defaultConfiguration().port(port);
         try {
             server = new RestServer(application, configuration);
         } catch (Exception e) {
@@ -46,11 +48,11 @@ public class HttpApplicationServer implements Server {
         }
     }
 
-    private static class PortfolioFeature implements ResourcesModule, ApplicationScopedModule {
+    private static class ValuationFeature implements ResourcesModule, ApplicationScopedModule {
 
         private final PortfolioBuilder portfolio;
 
-        private PortfolioFeature(PortfolioBuilder portfolio) {
+        private ValuationFeature(PortfolioBuilder portfolio) {
             this.portfolio = portfolio;
         }
 

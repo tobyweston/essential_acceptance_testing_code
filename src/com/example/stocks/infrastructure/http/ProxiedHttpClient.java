@@ -8,7 +8,7 @@ public class ProxiedHttpClient extends DirectHttpClient {
     private final String host;
     private final int port;
 
-    public ProxiedHttpClient(String host, int port) {
+    ProxiedHttpClient(String host, int port) {
         this.host = host;
         this.port = port;
     }

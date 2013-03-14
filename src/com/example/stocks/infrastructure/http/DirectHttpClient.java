@@ -9,6 +9,9 @@ import java.net.URL;
 
 public class DirectHttpClient implements HttpClient {
 
+    DirectHttpClient() {
+    }
+
     @Override
     public String get(URL url) {
         try {
