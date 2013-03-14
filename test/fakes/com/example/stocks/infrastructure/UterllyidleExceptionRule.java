@@ -13,7 +13,6 @@ public class UterllyidleExceptionRule implements TestRule {
 
     @Override
     public Statement apply(final Statement statement, Description description) {
-//    public Statement apply(final Statement statement, FrameworkMethod method, Object target) {
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
