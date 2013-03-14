@@ -1,5 +1,6 @@
 package com.example.stocks.core;
 
+import com.example.stocks.infrastructure.LoggingHttpClient;
 import com.example.stocks.infrastructure.server.Application;
 import com.example.stocks.infrastructure.server.HttpApplicationServerBuilder;
 import com.example.stocks.infrastructure.server.PortfolioBuilder;
@@ -19,8 +20,8 @@ public class ApplicationFixture {
 
     public static Application applicationWithRealYahoo() {
         Book book = new StubBook().add(Amazon).add(Apple);
-        Yahoo yahoo = new YqlWebService(defaultHttpClient());
-        MarketData marketData = new YahooMarketData(yahoo, new FrozenClock(new Date(2013, 8, 22)));
+        Yahoo yahoo = new YqlWebService(new LoggingHttpClient(defaultHttpClient()));
+        MarketData marketData = new YahooMarketData(yahoo, new FrozenClock(new Date(2012, 8, 23)));
         PortfolioBuilder portfolio = defaultPortfolio().with(book).with(marketData);
         HttpApplicationServerBuilder httpServer = defaultHttpServer().with(portfolio);
         return defaultApplication().with(httpServer).build();
@@ -28,10 +29,11 @@ public class ApplicationFixture {
 
     public static Application applicationWithFakeYahoo() {
         Book book = new StubBook().add(Amazon).add(Apple);
-        Yahoo yahoo = new YqlWebService(defaultHttpClient(), "http://localhost:" + FakeYahoo.port);
-        MarketData marketData = new YahooMarketData(yahoo, new FrozenClock(new Date(2013, 8, 22)));
+        Yahoo yahoo = new YqlWebService(new LoggingHttpClient(defaultHttpClient()), "http://localhost:" + FakeYahoo.port);
+        MarketData marketData = new YahooMarketData(yahoo, new FrozenClock(new Date(2012, 8, 22)));
         PortfolioBuilder portfolio = defaultPortfolio().with(book).with(marketData);
         HttpApplicationServerBuilder httpServer = defaultHttpServer().with(portfolio);
         return defaultApplication().with(httpServer).build();
     }
+
 }

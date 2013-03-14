@@ -11,29 +11,27 @@ import static java.text.MessageFormat.format;
 public class YqlWebService implements Yahoo {
 
     private String url = "http://query.yahooapis.com";
-    private String queryTemplate = url + "/v1/public/yql?q={0}&format=json&env=store://datatables.org/alltableswithkeys";
+    private String queryTemplate = "{0}/v1/public/yql?q={1}&format=json&env=store://datatables.org/alltableswithkeys";
 
-    private final HttpClient client;
+    private final HttpClient http;
 
-    public YqlWebService(HttpClient client) {
-        this.client = client;
+    public YqlWebService(HttpClient http) {
+        this.http = http;
     }
 
-    public YqlWebService(HttpClient client, String url) {
-        this.client = client;
+    public YqlWebService(HttpClient http, String url) {
+        this.http = http;
         this.url = url;
     }
 
     @Override
     public String executeQuery(String yql) {
-        return client.get(urlFor(yql));
+        return http.get(urlFor(yql));
     }
 
     private URL urlFor(String yql) {
         try {
-            URL url = new URL(format(queryTemplate, encode(yql, "UTF-8")));
-            System.out.println("GET" + url);
-            return url;
+            return new URL(format(queryTemplate, url, encode(yql, "UTF-8")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

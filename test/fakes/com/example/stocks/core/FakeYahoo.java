@@ -2,35 +2,31 @@ package com.example.stocks.core;
 
 import com.example.stocks.infrastructure.server.Server;
 import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import com.github.tomakehurst.wiremock.client.UrlMatchingStrategy;
-import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 
 public class FakeYahoo implements Server {
 
     public static final Integer port = 8001;
 
-    private final WireMockServer server = new WireMockServer(new WireMockConfiguration().port(port));
+    private final WireMockServer server = new WireMockServer(wireMockConfig().port(port));
 
     @Override
     public void start() {
+        configureFor("localhost", port);
         server.start();
     }
 
-    public void stub(String url, String response) {
-        stubFor(get(urlStartsWith("/v1/public/yql")).willReturn(aResponse().withBody("370")));
+    public void stub(UrlMatchingStrategy urlMatchingStrategy, ResponseDefinitionBuilder response) {
+        stubFor(get(urlMatchingStrategy).willReturn(response));
     }
 
     @Override
     public void stop() {
         server.stop();
-    }
-
-    public static UrlMatchingStrategy urlStartsWith(String url) {
-        UrlMatchingStrategy urlStrategy = new UrlMatchingStrategy();
-        urlStrategy.setUrlPattern(url + ".*");
-        return urlStrategy;
     }
 
 }
