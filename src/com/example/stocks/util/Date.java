@@ -14,8 +14,8 @@ public class Date {
     public Date() {
         Calendar calendar = new GregorianCalendar();
         this.year = calendar.get(YEAR);
-        this.month = calendar.get(MONTH);
-        this.day = calendar.get(DAY_OF_WEEK);
+        this.month = monthFrom(calendar) == 13 ? 1 : monthFrom(calendar);
+        this.day = calendar.get(DAY_OF_MONTH);
     }
 
     public Date(Integer year, Integer month, Integer day) {
@@ -26,5 +26,9 @@ public class Date {
 
     public String format(DateFormatter formatter) {
         return formatter.format(year, month, day);
+    }
+
+    private static int monthFrom(Calendar calendar) {
+        return calendar.get(MONTH) + 1;
     }
 }
