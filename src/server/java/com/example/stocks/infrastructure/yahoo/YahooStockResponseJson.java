@@ -32,7 +32,7 @@ public class YahooStockResponseJson implements Stock {
 
     public Money getClosingPrice() {
         if (error() || !hasResults())
-            return new Money(0);
+            return new NoClosingPrice();
         return new Money((String) getQuoteObject().get("Close"));
     }
 
@@ -46,5 +46,16 @@ public class YahooStockResponseJson implements Stock {
 
     private JSONObject getQuoteObject() {
         return (JSONObject) getResultsObject().get("quote");
+    }
+
+    private static class NoClosingPrice extends Money {
+        public NoClosingPrice() {
+            super(0);
+        }
+
+        @Override
+        public String toString() {
+            return "No closing price found";
+        }
     }
 }
