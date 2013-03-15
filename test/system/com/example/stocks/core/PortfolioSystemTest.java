@@ -48,8 +48,11 @@ public class PortfolioSystemTest {
 
         @Test
         public void shouldRetrieveValuation() {
-//            ui.navigateToLandingPage().setNumberOfShares(100).requestValuation();
+//            ui.navigateToLandingPage().setNumberOfShares(100).requestValuation(); <-- not doing this as it couples the tests
+            String response = "{\"query\":{\"results\":{\"quote\":{\"Close\":\"200.10\"}}}}";
+            fakeYahoo.stub(urlStartingWith("/v1/public/yql"), aResponse().withBody(response));
             ui.navigateToLandingPage().requestValuationForShares(100);
+            assertThat(ui.getPortfolioValue(), is("400.20"));
         }
 
         @Test

@@ -1,6 +1,7 @@
 package com.example.stocks.driver.pages;
 
 import com.example.stocks.driver.Selenium;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class LandingPage {
@@ -13,12 +14,14 @@ public class LandingPage {
         return this;
     }
 
-    public String getNumberOfShares() {
-        return "";
+    public LandingPage requestValuationForShares(Integer numberOfShares) {
+        driver.findElement(By.id("inputNumberOfShares")).sendKeys(numberOfShares.toString());
+        driver.findElement(By.id("requestValuation")).click();
+        return this;
     }
 
-    public void requestValuationForShares(Integer numberOfShares) {
-        return;
+    public String getPortfolioValue() {
+        return driver.findElement(By.id("valuation")).getText();
     }
 
     public void quit() {
