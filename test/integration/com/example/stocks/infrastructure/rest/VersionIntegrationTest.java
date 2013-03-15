@@ -9,6 +9,7 @@ import org.junit.Test;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static bad.robot.http.matchers.Matchers.content;
 import static com.example.stocks.infrastructure.http.HttpClientFactory.defaultHttpClient;
 import static com.googlecode.totallylazy.matchers.Matchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -24,7 +25,7 @@ public class VersionIntegrationTest {
 
     @Test
     public void version() throws MalformedURLException {
-        assertThat(defaultHttpClient().get(new URL("http://localhost:8000/version")), is("1.0"));
+        assertThat(defaultHttpClient().get(new URL("http://localhost:8000/version")), content(is("1.0")));
     }
 
     @After

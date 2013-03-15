@@ -1,14 +1,22 @@
 package com.example.stocks.infrastructure.http;
 
+import bad.robot.http.CommonHttpClient;
+import bad.robot.http.HttpClient;
+import bad.robot.http.listener.LoggingHttpClient;
 import com.example.stocks.infrastructure.Configuration;
 import com.example.stocks.infrastructure.SystemConfiguration;
+import org.apache.log4j.Logger;
+
+import static bad.robot.http.HttpClients.anApacheClient;
+import static bad.robot.http.configuration.Proxy.proxy;
+import static com.googlecode.totallylazy.URLs.url;
 
 public class HttpClientFactory {
 
     private final Configuration configuration;
 
     public static HttpClient defaultHttpClient() {
-        return new HttpClientFactory(new SystemConfiguration()).createClient();
+        return new LoggingHttpClient(new HttpClientFactory(new SystemConfiguration()).createClient(), Logger.getLogger(HttpClient.class));
     }
 
     public HttpClientFactory(Configuration configuration) {
@@ -16,8 +24,9 @@ public class HttpClientFactory {
     }
 
     public HttpClient createClient() {
-        if(configuration.useHttpProxy())
-            return new ProxiedHttpClient(configuration.getHttpProxyHost(), configuration.getHttpProxyPort());
-        return new DirectHttpClient();
+        CommonHttpClient http = anApacheClient();
+        if (configuration.useHttpProxy())
+            http.with(proxy(url(String.format("http://%s:%d", configuration.getHttpProxyHost(), configuration.getHttpProxyPort()))));
+        return http;
     }
 }

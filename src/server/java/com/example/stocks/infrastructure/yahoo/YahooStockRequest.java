@@ -21,6 +21,6 @@ public class YahooStockRequest {
     public Stock sendTo(Yahoo yahoo) {
         YahooDateFormatter formatter = new YahooDateFormatter();
         String query = format(queryTemplate, symbol.toSymbol(), date.format(formatter));
-        return new YahooStockQuote(yahoo.executeQuery(query));
+        return new YahooStockResponseJson(yahoo.executeQuery(query));
     }
 }

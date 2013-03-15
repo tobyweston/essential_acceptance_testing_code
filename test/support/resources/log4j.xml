@@ -26,6 +26,11 @@
         <appender-ref ref="console"/>
     </category>
 
+    <category name="bad.robot.http.HttpClient" additivity="false">
+        <priority value="error"/>
+        <appender-ref ref="console"/>
+    </category>
+
     <root>
         <priority value="warn"/>
         <appender-ref ref="console"/>

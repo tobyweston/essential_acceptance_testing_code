@@ -1,6 +1,8 @@
 package com.example.stocks.infrastructure.yahoo;
 
-import com.example.stocks.infrastructure.http.HttpClient;
+import bad.robot.http.HttpClient;
+import bad.robot.http.HttpResponse;
+import com.example.stocks.infrastructure.http.HttpResponseException;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,7 +28,10 @@ public class YqlWebService implements Yahoo {
 
     @Override
     public String executeQuery(String yql) {
-        return http.get(urlFor(yql));
+        HttpResponse response = http.get(urlFor(yql));
+        if (!response.ok())
+            throw new HttpResponseException(response);
+        return response.getContent().asString();
     }
 
     private URL urlFor(String yql) {

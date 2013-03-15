@@ -1,20 +1,18 @@
 package com.example.stocks.infrastructure.yahoo;
 
-import com.example.stocks.util.Json;
 import org.junit.Test;
 
 import static com.example.stocks.infrastructure.http.HttpClientFactory.defaultHttpClient;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.containsString;
 
 public class YqlWebServiceIntegrationTest {
 
-    private static final String query = "select * from yahoo.finance.historicaldata where symbol = \"YHOO\" and startDate = \"2009-09-07\" and endDate = \"2009-09-11\"";
+    private static final String query = "select * from yahoo.finance.historicaldata where symbol = \"YHOO\" and startDate = \"2009-09-07\" and endDate = \"2011-09-11\"";
 
     @Test
     public void checkYahooWebServiceIsUp() {
-        Json response = new Json(new YqlWebService(defaultHttpClient()).executeQuery(query));
-        assertThat(response.getObject("query").getLong("count"), is(greaterThan(0L)));
+        YqlWebService yahoo = new YqlWebService(defaultHttpClient());
+        assertThat(yahoo.executeQuery(query), containsString("results"));
     }
 }

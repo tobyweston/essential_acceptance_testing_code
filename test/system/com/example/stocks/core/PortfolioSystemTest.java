@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static bad.robot.http.matchers.Matchers.content;
 import static com.example.stocks.infrastructure.UrlMatchingStrategies.urlStartingWith;
 import static com.example.stocks.infrastructure.http.HttpClientFactory.defaultHttpClient;
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
@@ -55,7 +56,7 @@ public class PortfolioSystemTest {
         public void valuation() throws MalformedURLException {
             String response = "{\"query\":{\"results\":{\"quote\":{\"Close\":\"200.10\"}}}}";
             fakeYahoo.stub(urlStartingWith("/v1/public/yql"), aResponse().withBody(response));
-            assertThat(defaultHttpClient().get(new URL("http://localhost:" + HttpApplicationServer.port + "/portfolio/0001")), is("400.20"));
+            assertThat(defaultHttpClient().get(new URL("http://localhost:" + HttpApplicationServer.port + "/portfolio/0001")), content(is("400.20")));
         }
 
         private void stopServers() {
@@ -81,7 +82,7 @@ public class PortfolioSystemTest {
 
         @Test
         public void valuation() throws MalformedURLException {
-            assertThat(defaultHttpClient().get(new URL("http://localhost:" + HttpApplicationServer.port + "/portfolio/0001")), is("903.83"));
+            assertThat(defaultHttpClient().get(new URL("http://localhost:" + HttpApplicationServer.port + "/portfolio/0001")), content(is("903.83")));
         }
 
         @After
