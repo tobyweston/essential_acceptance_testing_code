@@ -1,10 +1,10 @@
 package com.example.stocks.core;
 
-public class NotionalPosition implements Position {
+public class SingleStockPosition implements Position {
 
     private final Symbol stock;
 
-    public NotionalPosition(Symbol stock) {
+    public SingleStockPosition(Symbol stock) {
         this.stock = stock;
     }
 
