@@ -6,14 +6,20 @@ import com.example.stocks.util.Json;
 
 public class YahooStockQuote implements Stock {
 
-    private final Json quote;
+    private final Json results;
 
     public YahooStockQuote(String json) {
-        this.quote = new Json(json).getObject("query").getObject("results").getObject("quote");
+        this.results = new Json(json).getObject("query").getObject("results");
     }
 
     @Override
     public Money getClosingPrice() {
-        return new Money(quote.getString("Close"));
+        if (results.isEmpty())
+            return new Money(0);
+        return new Money(results.getObject("quote").getString("Close"));
+    }
+
+    private boolean missing(Json quote) {
+        return quote == null;
     }
 }

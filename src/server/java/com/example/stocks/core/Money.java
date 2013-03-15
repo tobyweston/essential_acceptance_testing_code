@@ -2,7 +2,7 @@ package com.example.stocks.core;
 
 import java.math.BigDecimal;
 
-public class Money {
+public class Money implements Comparable<Money> {
 
     private final BigDecimal amount;
 
@@ -28,9 +28,16 @@ public class Money {
 
     @Override
     public boolean equals(Object other) {
-        if (this == other) return true;
-        if (!(other instanceof Money)) return false;
-        return amount.equals(((Money) other).amount);
+        if (this == other)
+            return true;
+        if (!(other instanceof Money))
+            return false;
+        return this.compareTo((Money) other) == 0;
+    }
+
+    @Override
+    public int compareTo(Money other) {
+        return this.amount.compareTo(other.amount);
     }
 
     @Override

@@ -20,6 +20,10 @@ public class Json {
         this.root = root;
     }
 
+    public Boolean isEmpty() {
+        return root == null || root.isEmpty();
+    }
+
     public Json getObject(String property) {
         return new Json((JSONObject) root.get(property));
     }
