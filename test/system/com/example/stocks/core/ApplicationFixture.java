@@ -1,6 +1,6 @@
 package com.example.stocks.core;
 
-import com.example.stocks.infrastructure.LoggingHttpClient;
+import com.example.stocks.infrastructure.http.LoggingHttpClient;
 import com.example.stocks.infrastructure.server.Application;
 import com.example.stocks.infrastructure.server.HttpApplicationServerBuilder;
 import com.example.stocks.infrastructure.server.PortfolioBuilder;

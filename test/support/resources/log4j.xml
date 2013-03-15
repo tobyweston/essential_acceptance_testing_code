@@ -16,6 +16,16 @@
         <appender-ref ref="console"/>
     </category>
 
+    <category name="com.gargoylesoftware.htmlunit" additivity="false">
+        <priority value="error"/>
+        <appender-ref ref="console"/>
+    </category>
+
+    <category name="com.gargoylesoftware.htmlunit.javascript" additivity="false">
+        <priority value="error"/>
+        <appender-ref ref="console"/>
+    </category>
+
     <root>
         <priority value="warn"/>
         <appender-ref ref="console"/>

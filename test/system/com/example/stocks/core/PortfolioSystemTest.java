@@ -1,5 +1,6 @@
 package com.example.stocks.core;
 
+import com.example.stocks.driver.pages.LandingPage;
 import com.example.stocks.infrastructure.UterllyidleExceptionRule;
 import com.example.stocks.infrastructure.rest.HttpApplicationServer;
 import com.example.stocks.infrastructure.server.Server;
@@ -36,11 +37,18 @@ public class PortfolioSystemTest {
 
         private final Server application = ApplicationFixture.applicationWithFakeYahoo();
         private final FakeYahoo fakeYahoo = new FakeYahoo();
+        private final LandingPage ui = new LandingPage();
 
         @Before
         public void startServers() {
             application.start();
             fakeYahoo.start();
+        }
+
+        @Test
+        public void shouldRetrieveValuation() {
+//            ui.navigateToLandingPage().setNumberOfShares(100).requestValuation();
+            ui.navigateToLandingPage().requestValuationForShares(100);
         }
 
         @Test
@@ -55,6 +63,10 @@ public class PortfolioSystemTest {
             fakeYahoo.stop();
         }
 
+        @After
+        public void quitTheBrowser() {
+            ui.quit();
+        }
     }
 
     /** there's some sort of request limit on real Yahoo, so this may fail if you run it a lot */

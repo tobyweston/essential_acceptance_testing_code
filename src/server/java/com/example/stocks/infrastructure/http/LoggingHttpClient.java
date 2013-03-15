@@ -1,6 +1,4 @@
-package com.example.stocks.infrastructure;
-
-import com.example.stocks.infrastructure.http.HttpClient;
+package com.example.stocks.infrastructure.http;
 
 import java.net.URL;
 

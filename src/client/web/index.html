@@ -14,20 +14,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <!--<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">-->
-                <!--<span class="icon-bar"></span>-->
-                <!--<span class="icon-bar"></span>-->
-                <!--<span class="icon-bar"></span>-->
-            <!--</button>-->
             <a class="brand" href="#">Portfolio Valuation</a>
-
-            <!--<div class="nav-collapse collapse">-->
-                <!--<ul class="nav">-->
-                    <!--<li class="active"><a href="#">Home</a></li>-->
-                    <!--<li><a href="#about">About</a></li>-->
-                    <!--<li><a href="#contact">Contact</a></li>-->
-                <!--</ul>-->
-            <!--</div>-->
         </div>
     </div>
 </div>
@@ -39,24 +26,25 @@
 
     <div>
         <p>
-            <span id="price"><strong>265.74</strong></span> <small id="movement">-9.54</small>
+            <span id="price"><strong>265.74</strong></span>
+            <small id="movement">-9.54</small>
         </p>
     </div>
 
-    <form class="form-horizontal">
+    <form class="form-horizontal" method="get" action="/portfolio/0001">
         <legend>Your Portfolio</legend>
 
         <div class="control-group">
             <label class="control-label" for="inputNumberOfShares">Number of shares</label>
+
             <div class="controls">
                 <input type="text" id="inputNumberOfShares" placeholder="10">
             </div>
         </div>
         <div class="control-group">
             <div class="controls">
-
-            <button type="submit" class="btn btn-primary btn-large">Request valuation</button>
-                </div>
+                <button type="submit" class="btn btn-primary btn-large">Request valuation</button>
+            </div>
         </div>
     </form>
 
