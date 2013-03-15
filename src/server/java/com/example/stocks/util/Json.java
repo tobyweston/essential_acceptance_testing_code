@@ -4,8 +4,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import static java.lang.Integer.*;
-
 public class Json {
 
     private final JSONObject root;

@@ -1,8 +1,6 @@
 package com.example.stocks.infrastructure.rest;
 
-import com.example.stocks.infrastructure.SystemConfiguration;
 import com.example.stocks.infrastructure.http.HttpClient;
-import com.example.stocks.infrastructure.http.HttpClientFactory;
 import com.example.stocks.infrastructure.server.ApplicationBuilder;
 import com.example.stocks.infrastructure.server.Server;
 import org.concordion.api.ExpectedToPass;
@@ -13,6 +11,8 @@ import org.junit.runner.RunWith;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import static com.example.stocks.infrastructure.http.HttpClientFactory.defaultHttpClient;
 
 @RunWith(ConcordionRunner.class)
 @ExpectedToPass
@@ -26,7 +26,7 @@ public class VersionAcceptanceTest {
     }
 
     public String getVersion(String url) throws MalformedURLException {
-        HttpClient http = new HttpClientFactory(new SystemConfiguration()).createClient();
+        HttpClient http = defaultHttpClient();
         return http.get(new URL("http://localhost:8000" + url));
     }
 

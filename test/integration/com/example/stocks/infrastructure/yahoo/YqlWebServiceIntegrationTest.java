@@ -1,11 +1,9 @@
 package com.example.stocks.infrastructure.yahoo;
 
-import com.example.stocks.infrastructure.SystemConfiguration;
-import com.example.stocks.infrastructure.http.HttpClient;
-import com.example.stocks.infrastructure.http.HttpClientFactory;
 import com.example.stocks.util.Json;
 import org.junit.Test;
 
+import static com.example.stocks.infrastructure.http.HttpClientFactory.defaultHttpClient;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
@@ -16,8 +14,7 @@ public class YqlWebServiceIntegrationTest {
 
     @Test
     public void checkYahooWebServiceIsUp() {
-        HttpClient client = new HttpClientFactory(new SystemConfiguration()).createClient();
-        Json response = new Json(new YqlWebService(client).executeQuery(query));
+        Json response = new Json(new YqlWebService(defaultHttpClient()).executeQuery(query));
         assertThat(response.getObject("query").getLong("count"), is(greaterThan(0L)));
     }
 }

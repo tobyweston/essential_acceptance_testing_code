@@ -4,7 +4,6 @@ import com.example.stocks.core.Valuation;
 import com.example.stocks.infrastructure.server.PortfolioBuilder;
 import com.example.stocks.infrastructure.server.Server;
 import com.googlecode.utterlyidle.Application;
-import com.googlecode.utterlyidle.ApplicationBuilder;
 import com.googlecode.utterlyidle.Resources;
 import com.googlecode.utterlyidle.ServerConfiguration;
 import com.googlecode.utterlyidle.httpserver.RestServer;
@@ -14,6 +13,9 @@ import com.googlecode.yadic.Container;
 
 import java.io.IOException;
 
+import static com.example.stocks.infrastructure.rest.URLs.defaultPackageUrl;
+import static com.googlecode.totallylazy.Strings.EMPTY;
+import static com.googlecode.utterlyidle.ApplicationBuilder.application;
 import static com.googlecode.utterlyidle.ServerConfiguration.defaultConfiguration;
 import static com.googlecode.utterlyidle.annotations.AnnotatedBindings.annotatedClass;
 
@@ -30,9 +32,13 @@ public class HttpApplicationServer implements Server {
 
     @Override
     public void start() {
-        Application application = ApplicationBuilder.application().add(new ValuationFeature(portfolio)).addAnnotated(Version.class).build();
-        ServerConfiguration configuration = defaultConfiguration().port(port);
         try {
+            Application application = application()
+                    .add(new ValuationFeature(portfolio))
+                    .add(annotatedClass(Version.class))
+                    .content(defaultPackageUrl(getClass()), EMPTY)
+                    .build();
+            ServerConfiguration configuration = defaultConfiguration().port(port);
             server = new RestServer(application, configuration);
         } catch (Exception e) {
             throw new RuntimeException(e);
