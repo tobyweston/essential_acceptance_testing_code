@@ -34,23 +34,14 @@
         </p>
     </div>
 
-    <form id="requestValuationForm" class="form-horizontal">
+    <form id="requestValuationForm" class="form-inline">
         <legend>Your Portfolio</legend>
 
-        <div class="control-group">
             <label class="control-label" for="inputNumberOfShares">Number of shares</label>
-
-            <div class="controls">
-                <input id="inputNumberOfShares" type="text" placeholder="10">
-            </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <button type="submit" id="requestValuation" class="btn btn-primary btn-large">Request valuation</button>
-            </div>
-        </div>
+            <input id="inputNumberOfShares" type="text" placeholder="10">
+            <label id="requestValuationResult" class="lead"></label>
     </form>
-    <p class="requestValuationResult"></p>
+    <button onclick="requestValuation();" id="requestValuation" class="btn btn-primary btn-large">Request valuation</button>
 </div>
 
 <script type="text/javascript">
@@ -64,11 +55,11 @@ function requestValuation() {
     $.ajax({
         url: "portfolio/0001",
         success: function (data) {
-            $('.requestValuationResult').html(data);
+            $('#requestValuationResult').html(data);
         },
         error: function (XMLHttpRequest, textStatus, error) {
             console.log('Error GET portfolio/? ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
-            $('.requestValuationResult').html(XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
+            $('#requestValuationResult').html(XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
         }
     });
 }

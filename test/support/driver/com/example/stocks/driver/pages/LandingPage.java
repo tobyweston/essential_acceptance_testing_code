@@ -21,7 +21,7 @@ public class LandingPage {
     }
 
     public String getPortfolioValue() {
-        return driver.findElement(By.id("valuation")).getText();
+        return driver.findElement(By.id("requestValuationResult")).getText();
     }
 
     public void quit() {

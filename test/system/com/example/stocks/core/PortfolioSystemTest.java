@@ -15,11 +15,16 @@ import org.junit.runner.RunWith;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.TimeoutException;
 
 import static bad.robot.http.matchers.Matchers.content;
+import static com.example.stocks.core.LandingPagePortfolioValueCondition.portfolioValueFrom;
 import static com.example.stocks.infrastructure.UrlMatchingStrategies.urlStartingWith;
 import static com.example.stocks.infrastructure.http.HttpClientFactory.defaultHttpClient;
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.google.code.tempusfugit.temporal.Duration.millis;
+import static com.google.code.tempusfugit.temporal.Timeout.timeout;
+import static com.google.code.tempusfugit.temporal.WaitFor.waitOrTimeout;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -47,12 +52,12 @@ public class PortfolioSystemTest {
         }
 
         @Test
-        public void shouldRetrieveValuation() {
+        public void shouldRetrieveValuation() throws TimeoutException, InterruptedException {
 //            ui.navigateToLandingPage().setNumberOfShares(100).requestValuation(); <-- not doing this as it couples the tests
             String response = "{\"query\":{\"results\":{\"quote\":{\"Close\":\"200.10\"}}}}";
             fakeYahoo.stub(urlStartingWith("/v1/public/yql"), aResponse().withBody(response));
             ui.navigateToLandingPage().requestValuationForShares(100);
-            assertThat(ui.getPortfolioValue(), is("400.20"));
+            waitOrTimeout(portfolioValueFrom(ui, is("400.210")), timeout(millis(500)));
         }
 
         @Test
@@ -71,6 +76,7 @@ public class PortfolioSystemTest {
         public void quitTheBrowser() {
             ui.quit();
         }
+
     }
 
     /** there's some sort of request limit on real Yahoo, so this may fail if you run it a lot */
