@@ -28,18 +28,20 @@
 
     <div>
         <p>
-            <span id="price"><strong>265.74</strong></span> <small>(yesterday)</small> <small id="movement">-9.54</small>
+            <span id="price"><strong>265.74</strong></span>
+            <small>(yesterday)</small>
+            <small id="movement">-9.54</small>
         </p>
     </div>
 
-    <form class="form-horizontal" method="get" action="/portfolio/0001">
+    <form id="requestValuationForm" class="form-horizontal">
         <legend>Your Portfolio</legend>
 
         <div class="control-group">
             <label class="control-label" for="inputNumberOfShares">Number of shares</label>
 
             <div class="controls">
-                <input type="text" id="inputNumberOfShares" placeholder="10">
+                <input id="inputNumberOfShares" type="text" placeholder="10">
             </div>
         </div>
         <div class="control-group">
@@ -48,8 +50,29 @@
             </div>
         </div>
     </form>
-
+    <p class="requestValuationResult"></p>
 </div>
+
+<script type="text/javascript">
+$('#requestValuationForm').on('submit', function (e) {
+    requestValuation();
+});
+</script>
+
+<script type="text/javascript">
+function requestValuation() {
+    $.ajax({
+        url: "portfolio/0001",
+        success: function (data) {
+            $('.requestValuationResult').html(data);
+        },
+        error: function (XMLHttpRequest, textStatus, error) {
+            console.log('Error GET portfolio/? ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
+            $('.requestValuationResult').html(XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
+        }
+    });
+}
+</script>
 
 </body>
 </html>
