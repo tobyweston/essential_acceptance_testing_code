@@ -1,0 +1,72 @@
+<html>
+<head>
+    <title>Portfolio Valuation</title>
+    <link rel="stylesheet" href="../../../../../concordion.css" type="text/css"/>
+    <script src="../../../../../jquery-1.9.1.js">.</script>
+    <script type="text/javascript" src="../../../../../specifications.js">.</script>
+</head>
+<body onload="toggleDetails();">
+<h1>Portfolio Valuation <img style="cursor:pointer" onclick="toggleDetails();" src="../../../../../info.jpg" width="18px" height="18px" alt="Implementations notes" name="Toggle details"/></h1>
+
+<div class="details">
+    <div class="information">
+        <h3>Implementation notes</h3>
+
+        <p>
+            This test falls into the "system" test category. It's implemented using coarse grained components; it starts
+            up the full application and uses a test double to control the market data service.
+        </p>
+    </div>
+</div>
+
+<p>
+    As a retail customer, when I ask for my portfolio's value, yesterday's stock price is retrieved from the market,
+    multiplied by the number of stocks I own and the total is displayed.
+</p>
+
+<div class="example">
+    <h2>Given</h2>
+
+    <p>
+        A customer book containing <b>100</b> shares in <b>AMZN</b> and yesterday's stock price for <b>AMZN</b> was <b>261.82</b>,
+    </p>
+
+    <h2>When</h2>
+
+    <p>
+        The user requests a valuation,
+    </p>
+
+    <h2>Then</h2>
+
+    <p>
+        The total portfolio value of <b>26,185</b> is displayed.
+    </p>
+</div>
+
+<p>As a retail customer, when I ask for my portfolio's value, but market data is not available, I want to be informed
+    that a problem prevented me from getting the valuation.</p>
+
+<div class="example">
+    <h2>Given</h2>
+
+    <p>
+        Yesterday's stock prices are <b>unavailable</b> (market data services are down),
+    </p>
+
+    <h2>When</h2>
+
+    <p>
+        The user requests a valuation,
+    </p>
+
+    <h2>Then</h2>
+
+    <p>
+        The total portfolio value of is <b>not displayed</b> and an <b>error messaging indicating the problem is
+        displayed</b>.
+    </p>
+</div>
+
+</body>
+</html>
