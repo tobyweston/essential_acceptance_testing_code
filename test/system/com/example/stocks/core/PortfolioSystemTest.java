@@ -2,7 +2,6 @@ package com.example.stocks.core;
 
 import com.example.stocks.driver.pages.LandingPage;
 import com.example.stocks.infrastructure.UterllyidleExceptionRule;
-import com.example.stocks.infrastructure.rest.HttpApplicationServer;
 import com.example.stocks.infrastructure.server.Server;
 import org.junit.After;
 import org.junit.Before;
@@ -14,19 +13,16 @@ import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.concurrent.TimeoutException;
 
-import static bad.robot.http.matchers.Matchers.content;
 import static com.example.stocks.core.Probes.portfolioValuationFrom;
 import static com.example.stocks.infrastructure.UrlMatchingStrategies.urlStartingWith;
-import static com.example.stocks.infrastructure.http.HttpClientFactory.defaultHttpClient;
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.google.code.tempusfugit.condition.Conditions.assertion;
 import static com.google.code.tempusfugit.temporal.Duration.millis;
+import static com.google.code.tempusfugit.temporal.Duration.seconds;
 import static com.google.code.tempusfugit.temporal.Timeout.timeout;
 import static com.google.code.tempusfugit.temporal.WaitFor.waitFor;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(Enclosed.class)
@@ -61,13 +57,6 @@ public class PortfolioSystemTest {
             waitFor(assertion(portfolioValuationFrom(ui), is("400.20")), timeout(millis(500)));
         }
 
-        @Test
-        public void valuation() throws MalformedURLException {
-            String response = "{\"query\":{\"results\":{\"quote\":{\"Close\":\"200.10\"}}}}";
-            fakeYahoo.stub(urlStartingWith("/v1/public/yql"), aResponse().withBody(response));
-            assertThat(defaultHttpClient().get(new URL("http://localhost:" + HttpApplicationServer.port + "/portfolio/0001")), content(is("400.20")));
-        }
-
         private void stopServers() {
             application.stop();
             fakeYahoo.stop();
@@ -84,6 +73,7 @@ public class PortfolioSystemTest {
     public static class PortfolioSystemTestWithRealYahoo {
 
         private final Server application = ApplicationFixture.applicationWithRealYahoo();
+        private final LandingPage ui = new LandingPage();
 
         @Before
         public void startServers() {
@@ -91,13 +81,15 @@ public class PortfolioSystemTest {
         }
 
         @Test
-        public void valuation() throws MalformedURLException {
-            assertThat(defaultHttpClient().get(new URL("http://localhost:" + HttpApplicationServer.port + "/portfolio/0001")), content(is("903.83")));
+        public void shouldRetrieveValuation() throws MalformedURLException, InterruptedException {
+            ui.navigateToLandingPage().requestValuationForShares(100);
+            waitFor(assertion(portfolioValuationFrom(ui), is("903.83")), timeout(seconds(5)));
         }
 
         @After
         public void stopServer() {
             application.stop();
+            ui.quit();
         }
 
     }
