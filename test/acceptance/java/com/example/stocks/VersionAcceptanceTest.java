@@ -1,4 +1,4 @@
-package com.example.stocks.infrastructure.rest;
+package com.example.stocks;
 
 import bad.robot.http.HttpClient;
 import bad.robot.http.HttpResponse;
