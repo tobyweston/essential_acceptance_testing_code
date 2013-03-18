@@ -15,14 +15,8 @@ import org.junit.runner.RunWith;
 import java.net.MalformedURLException;
 import java.util.concurrent.TimeoutException;
 
-import static com.example.stocks.core.Probes.portfolioValuationFrom;
 import static com.example.stocks.infrastructure.UrlMatchingStrategies.urlStartingWith;
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.google.code.tempusfugit.condition.Conditions.assertion;
-import static com.google.code.tempusfugit.temporal.Duration.millis;
-import static com.google.code.tempusfugit.temporal.Duration.seconds;
-import static com.google.code.tempusfugit.temporal.Timeout.timeout;
-import static com.google.code.tempusfugit.temporal.WaitFor.waitFor;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(Enclosed.class)
@@ -52,8 +46,7 @@ public class PortfolioSystemTest {
         public void shouldRetrieveValuation() throws TimeoutException, InterruptedException {
             String response = "{\"query\":{\"results\":{\"quote\":{\"Close\":\"200.10\"}}}}";
             fakeYahoo.stub(urlStartingWith("/v1/public/yql"), aResponse().withBody(response));
-            ui.navigateToLandingPage().requestValuationForShares(100);
-            waitFor(assertion(portfolioValuationFrom(ui), is("400.20")), timeout(millis(500)));
+            ui.navigateToLandingPage().requestValuationForShares(100).assertThatPortfolioValue(is("400.20"));
         }
 
         private void stopServers() {
@@ -80,8 +73,7 @@ public class PortfolioSystemTest {
 
         @Test
         public void shouldRetrieveValuation() throws MalformedURLException, InterruptedException {
-            ui.navigateToLandingPage().requestValuationForShares(100);
-            waitFor(assertion(portfolioValuationFrom(ui), is("903.83")), timeout(seconds(5)));
+            ui.navigateToLandingPage().requestValuationForShares(100).assertThatPortfolioValue(is("903.83"));
         }
 
         @After
