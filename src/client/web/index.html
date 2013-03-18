@@ -39,9 +39,12 @@
 
             <label class="control-label" for="inputNumberOfShares">Number of shares</label>
             <input id="inputNumberOfShares" type="text" placeholder="10">
-            <label id="requestValuationResult" class="lead"></label>
+            <label id="requestValuationResult" class="lead pull-right">100</label>
     </form>
     <button onclick="requestValuation();" id="requestValuation" class="btn btn-primary btn-large">Request valuation</button>
+    <div>
+        <p style="margin-top:30px" id="requestValuationError" class="muted"></p>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -59,7 +62,7 @@ function requestValuation() {
         },
         error: function (XMLHttpRequest, textStatus, error) {
             console.log('Error GET portfolio/? ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
-            $('#requestValuationResult').html(XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
+            $('#requestValuationError').html('Error: ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
         }
     });
 }
