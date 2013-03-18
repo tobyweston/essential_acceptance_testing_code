@@ -50,7 +50,6 @@ public class PortfolioSystemTest {
 
         @Test
         public void shouldRetrieveValuation() throws TimeoutException, InterruptedException {
-//            ui.navigateToLandingPage().setNumberOfShares(100).requestValuation(); <-- not doing this as it couples the tests
             String response = "{\"query\":{\"results\":{\"quote\":{\"Close\":\"200.10\"}}}}";
             fakeYahoo.stub(urlStartingWith("/v1/public/yql"), aResponse().withBody(response));
             ui.navigateToLandingPage().requestValuationForShares(100);
@@ -69,7 +68,6 @@ public class PortfolioSystemTest {
 
     }
 
-    /** there's some sort of request limit on real Yahoo, so this may fail if you run it a lot */
     public static class PortfolioSystemTestWithRealYahoo {
 
         private final Server application = ApplicationFixture.applicationWithRealYahoo();
