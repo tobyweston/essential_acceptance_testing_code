@@ -27,42 +27,29 @@
     </div>
 </div>
 
-<h2>Given</h2>
-
-<p>
-    Market data provides closing prices for all symbols <span class="more-details">[<a href="#" onclick="toggleDetails();">details</a>]</span>
-</p>
-<div class="details">
-    <div class="example">
-        <p>
-            Yahoo response with the following
-        </p>
-        <pre>
-{
-   "query":{
-      "results":xxx,
-      "count":1,
-      "created":"2013-03-15T15:01:28Z",
-      "lang":"en-US"
-   }
-}
-        </pre>
-    </div>
-</div>
-
 <h2>When</h2>
 
 <p>
-    A HTTP <code>GET</code> request is made to the system on the URL
-    <pre>/portfolio/0102</pre>
+    When the UI asks for the current portfolio valuation
 </p>
-
 
 <h2>Then</h2>
 
 <p>
-    A HTTP response with a status of <b concordion:assertEquals="foo()">200 (OK)</b> is returned containing with the
-    portfolio value <span class="more-details">[<a href="#" onclick="toggleDetails();">details</a>]</span>
+    A <b concordion:assertEquals="foo()">request for the portfolio value is made</b> to the application  <span class="more-details">[<a href="#" onclick="toggleDetails();">details</a>]</span>
+</p>
+
+<div class="details">
+    <p>
+        A HTTP <code>GET</code> request is made to the system on the URL
+    </p>
+    <div class="example">
+        <pre>/portfolio/0102</pre>
+    </div>
+</div>
+
+<p>
+    and a valid the response <b concordion:assertEquals="foo()">is received</b> <span class="more-details">[<a href="#" onclick="toggleDetails();">details</a>]</span>
 </p>
 
 <div class="details">
