@@ -1,20 +1,27 @@
-<html>
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
 <head>
     <title>Portfolio Valuation - UI Transport test</title>
     <link rel="stylesheet" href="../../../../concordion.css" type="text/css"/>
+    <link rel="stylesheet" href="../../../../style.css" type="text/css"/>
     <script src="../../../../jquery-1.9.1.js">.</script>
     <script type="text/javascript" src="../../../../specifications.js">.</script>
 </head>
-<body onload="toggleDetails();">
-<h1>Portfolio Valuation <img style="cursor:pointer" onclick="toggleDetails();" src="../../../../info.jpg" width="18px" height="18px" alt="Implementations notes" name="Toggle details"/></h1>
+<body onload="toggleImplementationNotes(); toggleDetails();">
+<h1>Portfolio Valuation </h1>
 
-<div class="details">
+<h2>UI Transport Test <img style="cursor:pointer" onclick="toggleImplementationNotes();" src="../../../../info.jpg" width="18px" height="18px" alt="Implementations notes" name="Toggle details"/></h2>
+
+<div class="implementation-notes">
     <div class="information">
         <h3>Implementation notes</h3>
 
         <p>
-            When the UI asks for a valuations, a specific message is sent over the wire. The response format is also exercised but how that value is actually used is is left to another test.
+            When the UI asks for a valuations, a specific message is sent over the wire. The response format is also
+            exercised but how that value is actually used is is left to another test. For example, if the request is
+            sent as JSON, the JSON content may be verified. The response body may be verified against a specific JSON
+            format and the HTTP response code verified to be 200 (OK).
         </p>
+
         <p>
             <img src="ui-transport-test.png" width="400px" height="140px" border="1px"/>
         </p>
@@ -25,17 +32,52 @@
     <h2>Given</h2>
 
     <p>
+        Market data will provide closing prices <span class="more-details">[<a href="#" onclick="toggleDetails();">details</a>]</span>
     </p>
+    <div class="details">
+        <p>
+            Yahoo response with the following
+        </p>
+        <pre>
+{
+   "query":{
+      "results":xxx,
+      "count":1,
+      "created":"2013-03-15T15:01:28Z",
+      "lang":"en-US"
+   }
+}
+        </pre>
+    </div>
 
     <h2>When</h2>
 
     <p>
+        A HTTP <code>GET</code> request is made to the system on the URL
+        <pre>/portfolio/0102</pre>
     </p>
+
 
     <h2>Then</h2>
 
     <p>
+        A HTTP response with a status of <b concordion:assertEquals="foo()">200 (OK)</b> is returned containing with the
+        portfolio value <span class="more-details">[<a href="#" onclick="toggleDetails();">details</a>]</span>
     </p>
+
+    <div class="details">
+        <p>
+            The full response message looked like this
+        </p>
+        <pre>
+HTTP/1.1 200 OK
+Content-type: */*; charset="UTF-8"
+Content-length: 1
+Date: Sun, 24 Mar 2013 07:20:30 UTC
+
+104550
+        </pre>
+    </div>
 </div>
 
 </body>
