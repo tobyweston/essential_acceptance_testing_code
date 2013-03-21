@@ -1,4 +1,4 @@
-<html>
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
 <head>
     <title>Portfolio Valuation - Portfolio JSON request test</title>
     <link rel="stylesheet" href="../../../../concordion.css" type="text/css"/>
@@ -26,14 +26,17 @@
 
 <h2>Given</h2>
 <p>
+    A customer <a href="http://www.investopedia.com/terms/b/book.asp">book</a> containing 100 shares in <b>AMZN</b> and yesterday's stock price for <b>AMZN</b> was <b>261.82</b>
 </p>
 
 <h2>When</h2>
 <p>
+    The user requests a valuation (the portfolio receives a request for a valuation of the client's <a href="http://www.investopedia.com/terms/b/book.asp">book</a>)
 </p>
 
 <h2>Then</h2>
 <p>
+    The total portfolio valuation will be <b concordion:assertEquals="getTotalPortfolioValue()">26,185.00</b>
 </p>
 
 </body>
