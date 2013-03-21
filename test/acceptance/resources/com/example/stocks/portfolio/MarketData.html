@@ -1,4 +1,4 @@
-<html>
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
 <head>
     <title>Portfolio Valuation - Market data test</title>
     <link rel="stylesheet" href="../../../../concordion.css" type="text/css"/>
@@ -14,7 +14,9 @@
     <div class="information">
         <h3>Implementation notes</h3>
         <p>
-            This test exercises the <code>Market Data</code> port is called correctly from the <code>Portfolio</code>. confirms the Java API to Java API
+            This test simulates the <code>Portfolio</code> requesting a stock price from <code>Market Data</code>. It's
+            exercising that the <code>Market Data</code> port is called correctly (it confirms the <code>Portfolio</code>
+            Java API message is translated into the <code>Market Data</code> Java API message.
         </p>
         <p>
             <img src="market-data-test.png" width="400px" height="140px" border="1px"/>
@@ -24,10 +26,12 @@
 
 <h2>When</h2>
 <p>
+    The stock price for <b>AMZN</b> is requested
 </p>
 
 <h2>Then</h2>
 <p>
+    Yahoo is queried for <b concordion:assertEquals="">AMZN</b>
 </p>
 
 <div class="information">
