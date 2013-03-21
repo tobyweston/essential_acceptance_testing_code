@@ -6,6 +6,6 @@ import org.junit.runner.RunWith;
 
 @RunWith(ConcordionRunner.class)
 @Unimplemented
-public class PortfolioJsonRequestTest {
+public class PortfolioHttpRequestTest {
 
 }

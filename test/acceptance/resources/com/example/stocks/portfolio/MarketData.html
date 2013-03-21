@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title>Portfolio Valuation - Market data test</title>
+    <link rel="stylesheet" href="../../../../concordion.css" type="text/css"/>
+    <link rel="stylesheet" href="../../../../style.css" type="text/css"/>
+    <script src="../../../../jquery-1.9.1.js">.</script>
+    <script type="text/javascript" src="../../../../specifications.js">.</script>
+</head>
+<body onload="toggleImplementationNotes(); toggleDetails();">
+<h1>Portfolio Valuation </h1>
+<h2>Market Data Test <img style="cursor:pointer" onclick="toggleImplementationNotes();" src="../../../../info.jpg" width="18px" height="18px" alt="Implementations notes" name="Toggle details"/></h2>
+
+<div class="implementation-notes">
+    <div class="information">
+        <h3>Implementation notes</h3>
+        <p>
+        </p>
+        <p>
+            <img src="market-data-test.png" width="400px" height="140px" border="1px"/>
+        </p>
+    </div>
+</div>
+
+<h2>When</h2>
+<p>
+    The price for <b>AMZN</b> is requested by the portfolio for the date <b>26th March 2013</b>
+</p>
+
+<h2>Then</h2>
+<p>
+    The following HTTP <code>GET</code> request to Yahoo is made
+    <pre>
+GET http://query.yahooapis.com/v1/public/yql?q=select+*+from+yahoo.finance.historicaldata+where+symbol+%3D+%22AMZN%22+and+startDate+%3D+%222013-03-26%22+and+endDate+%3D+%222013-03-26%22&format=json&env=store://datatables.org/alltableswithkeys HTTP/1.1
+Host: query.yahooapis.com
+Proxy-Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.2.2 (java 1.5)
+    </pre>
+</p>
+
+<div class="information">
+    <h3>Further information</h3>
+    <ul>
+        <li><a href="index.html">Overview</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
