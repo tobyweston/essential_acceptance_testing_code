@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title>Portfolio Valuation - UI Transport test</title>
+    <link rel="stylesheet" href="../../../../concordion.css" type="text/css"/>
+    <link rel="stylesheet" href="../../../../style.css" type="text/css"/>
+    <script src="../../../../jquery-1.9.1.js">.</script>
+    <script type="text/javascript" src="../../../../specifications.js">.</script>
+</head>
+<body onload="toggleImplementationNotes(); toggleDetails();">
+<h1>Portfolio Valuation </h1>
+<h2>UI Only Test <img style="cursor:pointer" onclick="toggleImplementationNotes();" src="../../../../info.jpg" width="18px" height="18px" alt="Implementations notes" name="Toggle details"/></h2>
+
+<div class="implementation-notes">
+    <div class="information">
+        <h3>Implementation notes</h3>
+
+        <p>
+            When a user requests the current portfolio value, the system is queried and the current value is displayed
+            appropriately. It's a UI test and is specifically testing the web UI, however, we would like to test the UI
+            without testing the backend.
+        </p>
+        <p>
+            <img src="ui-only-test.png" width="400px" height="140px" border="1px"/>
+        </p>
+        <p>
+            We can imagine the UI as having it's own port to the <code>Portfolio</code> component. In production, the
+            specific implementation of it's adapter would use a HTTP GET to call the server. However, in this test, we
+            can use a test double for the adapter and therefore, just test the port.
+        </p>
+        <p>
+            The real HTTP adapter uses JavaScript to make the call, so if we can use our own JavaScript substitute, we
+            can exercise the port without making a real HTTP call.
+        </p>
+    </div>
+</div>
+
+<h2>Given</h2>
+<p>
+    The server responds with a valid valuation
+</p>
+
+<h2>When</h2>
+<p>
+    The user clicks on the 'Request Valuation' button
+</p>
+
+<h2>Then</h2>
+<p>
+    The server is asked for the portfolio valuation and that value is displayed on the UI
+</p>
+
+</body>
+</html>
