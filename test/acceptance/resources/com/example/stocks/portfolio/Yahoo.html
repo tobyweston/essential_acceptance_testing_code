@@ -14,20 +14,30 @@
     <div class="information">
         <h3>Implementation notes</h3>
         <p>
-            This test exercises the <code>Market Data</code> port is called correctly from the <code>Portfolio</code>. confirms the Java API to Java API
+            This test exercises the Yahoo <code>Market Data</code> adapter to make a call to real Yahoo. The purpose of
+            this test is to confirm that our assumptions about the Yahoo API are correct. For example, if Yahoo change
+            the YQL string required to request stock prices, this test would start to fail.
         </p>
         <p>
-            <img src="market-data-test.png" width="400px" height="140px" border="1px"/>
+            <img src="yahoo-test.png" width="400px" height="140px" border="1px"/>
         </p>
     </div>
 </div>
 
 <h2>When</h2>
 <p>
+    The price for <b>AMZN</b> is requested by the portfolio for the date <b>26th March 2013</b>
 </p>
 
 <h2>Then</h2>
 <p>
+    The following HTTP <code>GET</code> request to Yahoo is made
+    <pre>
+GET http://query.yahooapis.com/v1/public/yql?q=select+*+from+yahoo.finance.historicaldata+where+symbol+%3D+%22AMZN%22+and+startDate+%3D+%222013-03-26%22+and+endDate+%3D+%222013-03-26%22&format=json&env=store://datatables.org/alltableswithkeys HTTP/1.1
+Host: query.yahooapis.com
+Proxy-Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.2.2 (java 1.5)
+    </pre>
 </p>
 
 <div class="information">
