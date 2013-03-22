@@ -11,7 +11,8 @@ import com.example.stocks.infrastructure.yahoo.YahooMarketData;
 import com.example.stocks.infrastructure.yahoo.YqlWebService;
 import com.example.stocks.util.RealClock;
 import org.concordion.api.ExpectedToPass;
-import org.concordion.api.extension.Extensions;
+import org.concordion.api.extension.ConcordionExtension;
+import org.concordion.api.extension.Extension;
 import org.concordion.integration.junit4.ConcordionRunner;
 import org.jmock.Mockery;
 import org.jmock.integration.junit4.JUnit4Mockery;
@@ -31,8 +32,9 @@ import static com.example.stocks.infrastructure.server.PortfolioBuilder.defaultP
 
 @RunWith(ConcordionRunner.class)
 @ExpectedToPass
-@Extensions({JQuery.class})
 public class PortfolioUiTransportTest {
+
+    @Extension public ConcordionExtension extension = new CopyResourcesToOutputFolder(this.getClass());
 
     public static final String EXPECTED_ENDPOINT = "http://query.yahooapis.com/v1/public/yql?" +
                                                         "q=select+*+from+yahoo.finance.historicaldata+where+symbol+%3D+%22AMZN%22+and+startDate+%3D+%222013-03-22%22+and+endDate+%3D+%222013-03-22%22" +
