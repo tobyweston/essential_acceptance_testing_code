@@ -36,7 +36,7 @@ public class PortfolioUiTransportTest {
 
     @Extension public ConcordionExtension extension = new CopyResourcesToOutputFolder(this.getClass());
 
-    public static final String EXPECTED_ENDPOINT = "http://query.yahooapis.com/v1/public/yql?" +
+    private static final String expectedYahooUrl = "http://query.yahooapis.com/v1/public/yql?" +
                                                         "q=select+*+from+yahoo.finance.historicaldata+where+symbol+%3D+%22AMZN%22+and+startDate+%3D+%222013-03-22%22+and+endDate+%3D+%222013-03-22%22" +
                                                         "&format=json" +
                                                         "&env=store://datatables.org/alltableswithkeys";
@@ -60,10 +60,10 @@ public class PortfolioUiTransportTest {
 
     public String requestPortfolioValue() throws MalformedURLException {
         context.checking(new org.jmock.Expectations() {{
-            oneOf(httpClient).get(new URL(EXPECTED_ENDPOINT)); will(returnValue(new StringHttpResponse(200, "OK", "", emptyHeaders())));
+            oneOf(httpClient).get(new URL(expectedYahooUrl)); will(returnValue(new StringHttpResponse(200, "OK", "{\"query\":{\"results\":{\"quote\":{\"Close\":\"200.10\"}}}}", emptyHeaders())));
         }});
         ui.navigateToLandingPage().requestValuationForShares(100);
-        return EXPECTED_ENDPOINT;
+        return expectedYahooUrl;
     }
 
     public String verifyHttpGet() {
