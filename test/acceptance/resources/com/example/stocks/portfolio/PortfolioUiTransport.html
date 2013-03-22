@@ -20,23 +20,27 @@
             sent as JSON, the JSON content may be verified. The response body may be verified against a specific JSON
             format and the HTTP response code verified to be 200 (OK).
         </p>
-
         <p>
             <img src="ui-transport-test.png" width="400px" height="140px" border="1px"/>
+        </p>
+        <p>
+            <ul>
+                <li>The UI is exercised (however, in our case, the server is <b>not</b> started</li>
+            </ul>
         </p>
     </div>
 </div>
 
 <h2>When</h2>
 
-<p>
+<p concordion:execute="#url = requestPortfolioValue()">
     When the UI asks for the current portfolio valuation
 </p>
 
 <h2>Then</h2>
 
 <p>
-    A <b concordion:assertEquals="foo()">request for the portfolio value is made</b> to the application  <span class="more-details">[<a href="#" onclick="toggleDetails();">details</a>]</span>
+    A <b concordion:assertEquals="verifyHttpGet()">request for the portfolio value is made</b> to the application  <span class="more-details">[<a href="#" onclick="toggleDetails();">details</a>]</span>
 </p>
 
 <div class="details">
@@ -44,12 +48,12 @@
         A HTTP <code>GET</code> request is made to the system on the URL
     </p>
     <div class="example">
-        <pre>/portfolio/0102</pre>
+        <pre concordion:echo="#url"></pre>
     </div>
 </div>
 
 <p>
-    and a valid the response <b concordion:assertEquals="foo()">is received</b> and <a href="PortfolioUi.html">displayed in the UI</a> <span class="more-details">[<a href="#" onclick="toggleDetails();">details</a>]</span>
+    and a valid the response <b>is received</b> and <a href="PortfolioUi.html">displayed in the UI</a> <span class="more-details">[<a href="#" onclick="toggleDetails();">details</a>]</span>
 </p>
 
 <div class="details">
