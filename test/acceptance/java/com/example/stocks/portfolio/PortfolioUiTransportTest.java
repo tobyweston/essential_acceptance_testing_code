@@ -36,7 +36,6 @@ public class PortfolioUiTransportTest {
     }
 
     public String requestPortfolioValue() throws MalformedURLException {
-//        application.stub(urlEndingWith(expectedUrl), aResponse().withBody("1000"));
         ui.navigateToLandingPage().requestValuationForShares(100);
         return expectedUrl;
     }
