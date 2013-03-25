@@ -1,8 +1,10 @@
 package com.example.stocks.infrastructure.server;
 
-import com.example.stocks.infrastructure.rest.HttpApplicationServer;
+import com.example.stocks.infrastructure.Builder;
+import com.example.stocks.infrastructure.HttpServer;
+import com.example.stocks.infrastructure.rest.RestfulApplicationServer;
 
-public class HttpApplicationServerBuilder {
+public class HttpApplicationServerBuilder implements Builder<HttpServer> {
 
     private PortfolioBuilder portfolio = PortfolioBuilder.defaultPortfolio();
 
@@ -18,7 +20,8 @@ public class HttpApplicationServerBuilder {
         return this;
     }
 
-    public HttpApplicationServer build() {
-        return new HttpApplicationServer(portfolio);
+    @Override
+    public HttpServer build() {
+        return new RestfulApplicationServer(portfolio);
     }
 }

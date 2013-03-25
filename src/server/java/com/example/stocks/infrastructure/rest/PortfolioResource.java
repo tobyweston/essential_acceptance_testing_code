@@ -1,9 +1,13 @@
 package com.example.stocks.infrastructure.rest;
 
 import com.example.stocks.core.Valuation;
+import com.googlecode.utterlyidle.Response;
 import com.googlecode.utterlyidle.annotations.GET;
 import com.googlecode.utterlyidle.annotations.Path;
 import com.googlecode.utterlyidle.annotations.PathParam;
+
+import static com.googlecode.utterlyidle.ResponseBuilder.response;
+import static com.googlecode.utterlyidle.Status.OK;
 
 public class PortfolioResource {
 
@@ -15,7 +19,7 @@ public class PortfolioResource {
 
     @GET
     @Path("/portfolio/{id}")
-    public String value(@PathParam("id") String id) {
-        return valuation.value().toString();
+    public Response value(@PathParam("id") String id) {
+        return response(OK).entity(valuation.value().toString()).header("Access-Control-Allow-Origin", "*").build();
     }
 }

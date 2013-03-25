@@ -1,8 +1,8 @@
 package com.example.stocks.infrastructure.rest;
 
 import com.example.stocks.core.Valuation;
+import com.example.stocks.infrastructure.HttpServer;
 import com.example.stocks.infrastructure.server.PortfolioBuilder;
-import com.example.stocks.infrastructure.server.Server;
 import com.googlecode.utterlyidle.Application;
 import com.googlecode.utterlyidle.Resources;
 import com.googlecode.utterlyidle.ServerConfiguration;
@@ -13,20 +13,18 @@ import com.googlecode.yadic.Container;
 
 import java.io.IOException;
 
-import static com.example.stocks.infrastructure.rest.URLs.defaultPackageUrl;
-import static com.googlecode.totallylazy.Strings.EMPTY;
 import static com.googlecode.utterlyidle.ApplicationBuilder.application;
 import static com.googlecode.utterlyidle.ServerConfiguration.defaultConfiguration;
 import static com.googlecode.utterlyidle.annotations.AnnotatedBindings.annotatedClass;
 
-public class HttpApplicationServer implements Server {
+public class RestfulApplicationServer implements HttpServer {
 
     public static final Integer port = 8000;
 
     private RestServer server;
     private PortfolioBuilder portfolio;
 
-    public HttpApplicationServer(PortfolioBuilder portfolio) {
+    public RestfulApplicationServer(PortfolioBuilder portfolio) {
         this.portfolio = portfolio;
     }
 
@@ -36,7 +34,6 @@ public class HttpApplicationServer implements Server {
             Application application = application()
                     .add(new ValuationFeature(portfolio))
                     .add(annotatedClass(Version.class))
-                    .content(defaultPackageUrl(getClass()), EMPTY)
                     .build();
             ServerConfiguration configuration = defaultConfiguration().port(port);
             server = new RestServer(application, configuration);

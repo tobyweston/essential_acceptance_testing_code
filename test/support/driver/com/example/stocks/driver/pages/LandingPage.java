@@ -16,7 +16,7 @@ public class LandingPage {
     private final WebDriver driver = Selenium.createWebDriverForPlatform();
 
     public LandingPage navigateToLandingPage() {
-        driver.get("http://localhost:8000/index.html");
+        driver.get("http://localhost:7000/index.html");
         Selenium.verifyPageTitle(driver, "Value your Portfolio");
         return this;
     }

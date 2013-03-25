@@ -16,7 +16,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class VersionIntegrationTest {
 
-    private final Server server = new HttpApplicationServer(PortfolioBuilder.defaultPortfolio());
+    private final Server server = new RestfulApplicationServer(PortfolioBuilder.defaultPortfolio());
 
     @Before
     public void startServer() {

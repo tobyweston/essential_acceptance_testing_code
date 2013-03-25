@@ -4,7 +4,7 @@ import bad.robot.http.HttpClient;
 import com.example.stocks.core.Book;
 import com.example.stocks.core.NumberOfStocks;
 import com.example.stocks.core.Position;
-import com.example.stocks.infrastructure.rest.HttpApplicationServer;
+import com.example.stocks.infrastructure.HttpServer;
 import com.example.stocks.infrastructure.yahoo.YahooMarketData;
 import com.example.stocks.infrastructure.yahoo.YqlWebService;
 import com.example.stocks.util.RealClock;
@@ -19,7 +19,7 @@ import static com.example.stocks.infrastructure.server.PortfolioBuilder.defaultP
 
 public class Application implements Server {
 
-    private final HttpApplicationServer server;
+    private final HttpServer server;
 
     public static Application productionConfiguration() {
         HttpClient http = defaultHttpClient();
@@ -28,7 +28,7 @@ public class Application implements Server {
         return defaultApplication().with(httpServer).build();
     }
 
-    Application(HttpApplicationServer server) {
+    Application(HttpServer server) {
         this.server = server;
     }
 
@@ -41,7 +41,7 @@ public class Application implements Server {
         server.stop();
     }
 
-    public static void main(String[] args) {
+    public static void main(String... args) {
         productionConfiguration().start();
     }
 

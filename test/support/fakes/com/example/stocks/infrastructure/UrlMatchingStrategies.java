@@ -9,4 +9,10 @@ public class UrlMatchingStrategies {
         urlStrategy.setUrlPattern(url + ".*");
         return urlStrategy;
     }
+
+    public static UrlMatchingStrategy urlEndingWith(String url) {
+        UrlMatchingStrategy urlStrategy = new UrlMatchingStrategy();
+        urlStrategy.setUrlPattern(".*" + url);
+        return urlStrategy;
+    }
 }

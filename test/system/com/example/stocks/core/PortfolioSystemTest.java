@@ -1,7 +1,9 @@
 package com.example.stocks.core;
 
 import com.example.stocks.driver.pages.LandingPage;
+import com.example.stocks.infrastructure.HttpServer;
 import com.example.stocks.infrastructure.UterllyidleExceptionRule;
+import com.example.stocks.infrastructure.client.WebUi;
 import com.example.stocks.infrastructure.server.Server;
 import org.junit.After;
 import org.junit.Before;
@@ -32,12 +34,14 @@ public class PortfolioSystemTest {
             }
         };
 
+        private final HttpServer client = new WebUi();
         private final Server application = ApplicationFixture.applicationWithFakeYahoo();
         private final FakeYahoo fakeYahoo = new FakeYahoo();
         private final LandingPage ui = new LandingPage();
 
         @Before
         public void startServers() {
+            client.start();
             application.start();
             fakeYahoo.start();
         }
@@ -50,6 +54,7 @@ public class PortfolioSystemTest {
         }
 
         private void stopServers() {
+            client.stop();
             application.stop();
             fakeYahoo.stop();
         }
@@ -63,11 +68,13 @@ public class PortfolioSystemTest {
 
     public static class PortfolioSystemTestWithRealYahoo {
 
+        private final HttpServer client = new WebUi();
         private final Server application = ApplicationFixture.applicationWithRealYahoo();
         private final LandingPage ui = new LandingPage();
 
         @Before
         public void startServers() {
+            client.start();
             application.start();
         }
 
@@ -78,6 +85,7 @@ public class PortfolioSystemTest {
 
         @After
         public void stopServer() {
+            client.stop();
             application.stop();
             ui.quit();
         }
