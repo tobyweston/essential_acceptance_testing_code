@@ -1,4 +1,4 @@
-package com.example.stocks.portfolio;
+package com.example.stocks;
 
 import org.concordion.api.Resource;
 import org.concordion.api.extension.ConcordionExtender;

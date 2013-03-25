@@ -1,6 +1,5 @@
 package com.example.stocks;
 
-import com.example.stocks.portfolio.CopyResourcesToOutputFolder;
 import org.concordion.api.ExpectedToPass;
 import org.concordion.api.extension.ConcordionExtension;
 import org.concordion.api.extension.Extension;
