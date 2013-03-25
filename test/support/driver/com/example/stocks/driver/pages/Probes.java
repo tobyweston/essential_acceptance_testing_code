@@ -1,6 +1,5 @@
-package com.example.stocks.core;
+package com.example.stocks.driver.pages;
 
-import com.example.stocks.driver.pages.LandingPage;
 import com.google.code.tempusfugit.temporal.ProbeFor;
 import org.hamcrest.Description;
 

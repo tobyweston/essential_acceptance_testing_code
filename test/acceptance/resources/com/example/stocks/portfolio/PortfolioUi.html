@@ -40,13 +40,13 @@
 </p>
 
 <h2>When</h2>
-<p>
+<p concordion:execute="requestPortfolioValue()">
     When the user asks for the current portfolio valuation in the UI
 </p>
 
 <h2>Then</h2>
 <p>
-    The server is <span concordion:assertEquals="">asked for the portfolio valuation</span> and that <span concordion:assertEquals="">value is displayed on the UI</span>
+    The server is asked for the portfolio valuation and that <span concordion:assertTrue="verifyPortfolioValue()">value is displayed on the UI</span>
 </p>
 
 <div class="information">
