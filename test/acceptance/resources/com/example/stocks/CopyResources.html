@@ -1,0 +1,29 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+    <title>Copy Resources</title>
+    <link rel="stylesheet" href="../../../concordion.css" type="text/css"/>
+</head>
+<body>
+<h1>Copy Resources</h1>
+
+<div class="information">
+<p>
+    Concordion won't copy any additional resources to it's output folder. To ensure that images and additional JavaScript files are copied, this test exercises a <a href="http://www.concordion.org/Extensions.html">Concordion Extension</a> that copies default resources.
+</p>
+</div>
+
+<h2>When</h2>
+
+<p>
+    <span concordion:set="#actual = getConcordionOutputFolder()">This test is executed</span>
+</p>
+
+<h2>Then</h2>
+<p>
+the <code>concordion.output.dir</code> environment variable was set and ended with <code concordion:assertTrue="#actual.endsWith(#TEXT)">/essential_acceptance_testing_code/out/test/</code> and the following <span concordion:assertTrue="resourcesCopied()">resources are copied to the output folder</span>.
+</p>
+
+<pre concordion:echo="getResources()"></pre>
+
+</body>
+</html>
