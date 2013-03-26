@@ -1,6 +1,6 @@
 <html xmlns:concordion="http://www.concordion.org/2007/concordion">
 <head>
-    <title>Portfolio Valuation - UI Only test</title>
+    <title>Portfolio Valuation - UI to Portfolio Port (Response) Test</title>
     <link rel="stylesheet" href="../../../../concordion.css" type="text/css"/>
     <link rel="stylesheet" href="../../../../style.css" type="text/css"/>
     <script src="../../../../jquery-1.9.1.js">.</script>
@@ -8,28 +8,39 @@
 </head>
 <body onload="toggleImplementationNotes(); toggleDetails();">
 <h1>Portfolio Valuation </h1>
-<h2>UI Only Test <img style="cursor:pointer" onclick="toggleImplementationNotes();" src="../../../../info.jpg" width="18px" height="18px" alt="Implementations notes" name="Toggle details"/></h2>
+<h2>UI to Portfolio Port (Response) Test <img style="cursor:pointer" onclick="toggleImplementationNotes();" src="../../../../info.jpg" width="18px" height="18px" alt="Implementations notes" name="Toggle details"/></h2>
 
 <div class="implementation-notes">
     <div class="information">
         <h3>Implementation notes</h3>
 
         <p>
-            When a user requests the current portfolio value, the system is queried and the current value is displayed
-            appropriately. It's specifically testing the web UI, however, we would like to test the UI without testing
-            the backend.
+            When a user requests the current portfolio value in the UI, the <code>Portfolio</code> is queried for it's
+            current value and it is displayed in the UI appropriately. It's specifically testing the web UI, however, we
+            would like to test the UI without testing the backend.
         </p>
         <p>
-            <img src="test-ui-only.png" width="400px" height="140px" border="1px"/>
+            <img src="test-ui-to-portfolio.png" width="400px" height="140px" border="1px"/>
         </p>
         <p>
-            We can imagine the UI as having it's own port to the <code>Portfolio</code> component. In production, the
-            specific implementation of it's adapter would use a HTTP GET to call the server. However, in this test, we
-            can use a test double for the adapter and therefore, just test the port.
+            The UI has an adapter to the <code>Portfolio</code> component. In production, the specific implementation of
+            it's adapter would use a HTTP <code>GET</code> to call the server. It's implemented in terms of a
+            <a href="http://api.jquery.com/">JQuery</a> ajax call. In testing however, we'd prefer to use
+            a test double for the adapter and therefore, just test the UI accesses the port correctly.
         </p>
         <p>
-            The real HTTP adapter uses JavaScript to make the call, so if we can use our own JavaScript substitute, we
-            can exercise the port without making a real HTTP call.
+            <ul>
+                <li>The web client is started up</li>
+                <li>The UI is used to click the 'request valuation' button</li>
+                <li>Using a fake "application", a canned response is setup against a specific HTTP <code>GET</code> call</li>
+                <li>The canned response is verified as being displayed correctly within the UI</li>
+            </ul>
+        </p>
+        <p>
+            In this test, we fake out the server (application) component so that the UI uses JQuery to make a a real
+            HTTP request that we can intercept and make assertions against. An alternative however would be to front
+            the JQuery call behind our own interface (port) and substitute this for testing. That way, we can exercise
+            the port without making a real HTTP call.
         </p>
     </div>
 </div>
