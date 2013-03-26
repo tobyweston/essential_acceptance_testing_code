@@ -58,7 +58,8 @@ function requestValuation() {
     $.ajax({
         url: "http://localhost:8000/portfolio/0001",
         success: function (data) {
-            $('#requestValuationResult').html(data);
+            var value = parseFloat(data);
+            $('#requestValuationResult').html(value.toLocaleString());
         },
         error: function (XMLHttpRequest, textStatus, error) {
             console.log('Error GET portfolio/? ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
