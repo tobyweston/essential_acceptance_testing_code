@@ -23,7 +23,7 @@ public class CopyResourcesToOutputFolder implements ConcordionExtension {
     @Override
     public void addTo(ConcordionExtender concordion) {
         copyResourcesFromDefaultPackage(defaultPackageUrl(getClass()), concordion, endsWith(".jpg"), endsWith(".css"));
-        copyResourcesFromClassesPackage(type, concordion, endsWith(".png"));
+        copyResourcesFromClassesPackage(type, concordion, endsWith(".png"), endsWith("index.html"));
     }
 
     private void copyResourcesFromDefaultPackage(URL root, ConcordionExtender concordion, FilenameFilter... filters) {
