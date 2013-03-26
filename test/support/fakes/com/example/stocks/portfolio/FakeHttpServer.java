@@ -6,10 +6,16 @@ import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import com.github.tomakehurst.wiremock.client.UrlMatchingStrategy;
 import com.github.tomakehurst.wiremock.client.VerificationException;
 import com.github.tomakehurst.wiremock.client.WireMock;
+import com.google.code.tempusfugit.concurrency.Callable;
 
 import static com.example.stocks.infrastructure.UrlMatchingStrategies.urlEndingWith;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
+import static com.google.code.tempusfugit.condition.Conditions.assertion;
+import static com.google.code.tempusfugit.temporal.Duration.millis;
+import static com.google.code.tempusfugit.temporal.Timeout.timeout;
+import static com.google.code.tempusfugit.temporal.WaitFor.waitFor;
+import static org.hamcrest.Matchers.is;
 
 public class FakeHttpServer implements HttpServer {
 
@@ -31,8 +37,23 @@ public class FakeHttpServer implements HttpServer {
         stubFor(get(urlMatchingStrategy).willReturn(response));
     }
 
-    public void verify(UrlMatchingStrategy urlMatchingStrategy) throws VerificationException {
-        WireMock.verify(getRequestedFor(urlMatchingStrategy));
+    public void verify(UrlMatchingStrategy url) throws InterruptedException {
+        waitFor(assertion(verificationOf(url), is(true)), timeout(millis(500)));
+    }
+
+    private static Callable<Boolean, RuntimeException> verificationOf(final UrlMatchingStrategy urlMatchingStrategy) {
+        return new Callable<Boolean, RuntimeException>() {
+            @Override
+            public Boolean call() throws RuntimeException {
+                try {
+                    WireMock.verify(getRequestedFor(urlMatchingStrategy));
+                    return true;
+                } catch (VerificationException e) {
+                    System.err.println(e.getMessage());
+                    return false;
+                }
+            }
+        };
     }
 
     @Override

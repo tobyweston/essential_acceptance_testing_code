@@ -4,7 +4,6 @@ import com.example.stocks.CopyResourcesToOutputFolder;
 import com.example.stocks.driver.pages.LandingPage;
 import com.example.stocks.infrastructure.HttpServer;
 import com.example.stocks.infrastructure.client.WebUi;
-import com.github.tomakehurst.wiremock.client.VerificationException;
 import org.concordion.api.ExpectedToPass;
 import org.concordion.api.extension.ConcordionExtension;
 import org.concordion.api.extension.Extension;
@@ -40,12 +39,11 @@ public class PortfolioUiRequestTest {
         return expectedUrl;
     }
 
-    public String verifyHttpGet() {
+    public String verifyHttpGet() throws InterruptedException {
         try {
             application.verify(urlEndingWith(expectedUrl));
             return "request for the portfolio value is made";
-        } catch (VerificationException e) {
-            System.err.println(e.getMessage());
+        } catch (AssertionError e) {
             return "request for the portfolio value was not made";
         }
     }
