@@ -20,7 +20,7 @@ import static org.hamcrest.Matchers.is;
 
 @RunWith(ConcordionRunner.class)
 @ExpectedToPass
-public class PortfolioUiTest {
+public class PortfolioUiResponseTest {
 
     @Extension public ConcordionExtension extension = new CopyResourcesToOutputFolder(this.getClass());
 
@@ -59,6 +59,5 @@ public class PortfolioUiTest {
         application.stop();
         ui.quit();
     }
-
 
 }

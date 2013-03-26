@@ -7,31 +7,57 @@
 </head>
 <body>
 <h1>Example Application</h1>
+
 <p>
-    Test overview for the example application to accompany <a href="https://leanpub.com/essential_acceptance_testing/">Essential Acceptance Testing</a>.
+    Test overview for the example application to accompany <a href="https://leanpub.com/essential_acceptance_testing/">Essential
+    Acceptance Testing</a>.
 </p>
+
 <p>
-    Check out the application source on <a href="https://github.com/tobyweston/essential_acceptance_testing_code">GitHub</a> and read the book on <a href="https://leanpub.com/essential_acceptance_testing/">Leanpub</a>.
+    Check out the application source on <a
+        href="https://github.com/tobyweston/essential_acceptance_testing_code">GitHub</a> and read the book on <a
+        href="https://leanpub.com/essential_acceptance_testing/">Leanpub</a>.
 </p>
 
 <div class="example">
     <h2>Acceptance Tests</h2>
     <ul>
-        <li><h3><a href="PortfolioUi.html">UI Only Test</a></h3>                <code>PortfolioUiTest.java</code></li>
-        <li><h3><a href="PortfolioUiTransport.html">UI Transport Test</a></h3>  <code>PortfolioUiTransportTest.java</code></li>
-        <li><h3><a href="PortfolioHttpRequest.html">HTTP Request Test</a></h3>  <code>PortfolioHttpRequestTest.java</code></li>
-        <li><h3><a href="MarketData.html">Market Data (API) Test</a></h3>       <code>MarketDataTest.java</code></li>
+        <li>
+            <h3>UI to Portfolio Adapter</h3>
+            <ul>
+                <li>
+                    <code><a href="PortfolioUiRequest.html">PortfolioUiRequestTest.java</a></code>
+                </li>
+                <li>
+                    <code><a href="PortfolioUiResponse.html">PortfolioUiResponseTest.java</a></code>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h3><a href="PortfolioHttpRequest.html">HTTP Request Test</a></h3>
+            <code>PortfolioHttpRequestTest.java</code></li>
+        <li>
+            <h3><a href="MarketData.html">Market Data (API) Test</a></h3>
+            <code>MarketDataTest.java</code></li>
     </ul>
 </div>
 
+</ul>
+
+</div>
+
+
 <div class="example">
     <h2>System Tests</h2>
+
     <p>
         Examples coarse grained or system tests.
     </p>
     <ul>
-        <li><h3><a href="PortfolioEndToEndAcceptance.html">End-to-End (System) Test</a></h3>    <code>PortfolioEndToEndAcceptanceTest.java</code></li>
-        <li><h3><a href="Yahoo.html">Market Data (Yahoo) Test</a></h3>                          <code>YahooTest.java</code></li>
+        <li><h3><a href="PortfolioEndToEndAcceptance.html">End-to-End (System) Test</a></h3>    <code>PortfolioEndToEndAcceptanceTest.java</code>
+        </li>
+        <li><h3><a href="Yahoo.html">Market Data (Yahoo) Test</a></h3>
+            <code>YahooTest.java</code></li>
     </ul>
 </div>
 

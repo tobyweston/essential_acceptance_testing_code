@@ -19,7 +19,7 @@ import static com.example.stocks.infrastructure.UrlMatchingStrategies.urlEndingW
 
 @RunWith(ConcordionRunner.class)
 @ExpectedToPass
-public class PortfolioUiTransportTest {
+public class PortfolioUiRequestTest {
 
     @Extension public ConcordionExtension extension = new CopyResourcesToOutputFolder(this.getClass());
 
