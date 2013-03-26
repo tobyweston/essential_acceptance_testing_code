@@ -1,6 +1,6 @@
 <html xmlns:concordion="http://www.concordion.org/2007/concordion">
 <head>
-    <title>Portfolio Valuation - Portfolio HTTP request test</title>
+    <title>Portfolio Valuation - HTTP Adapter to Java Message (Request) Test</title>
     <link rel="stylesheet" href="../../../../concordion.css" type="text/css"/>
     <link rel="stylesheet" href="../../../../style.css" type="text/css"/>
     <script src="../../../../jquery-1.9.1.js">.</script>
@@ -8,14 +8,14 @@
 </head>
 <body onload="toggleImplementationNotes(); toggleDetails();">
 <h1>Portfolio Valuation </h1>
-<h2>Portfolio HTTP Request Test <img style="cursor:pointer" onclick="toggleImplementationNotes();" src="../../../../info.jpg" width="18px" height="18px" alt="Implementations notes" name="Toggle details"/></h2>
+<h2>HTTP Adapter to Java Message (Request) Test <img style="cursor:pointer" onclick="toggleImplementationNotes();" src="../../../../info.jpg" width="18px" height="18px" alt="Implementations notes" name="Toggle details"/></h2>
 
 <div class="implementation-notes">
     <div class="information">
         <h3>Implementation notes</h3>
         <p>
             The <code>Portfolio</code>'s adapter is implemented in terms of HTTP; it's a RESTful server which
-            collaborates with this business interface directly. It turns the HTTP API into a Java API; we’re testing that
+            collaborates with this business interface directly. It turns the HTTP API into a Java API; we're testing that
             a HTTP message turns into a Java message.
         </p>
         <p>
