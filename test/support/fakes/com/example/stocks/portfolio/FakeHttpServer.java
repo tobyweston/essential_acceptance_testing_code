@@ -7,6 +7,7 @@ import com.github.tomakehurst.wiremock.client.UrlMatchingStrategy;
 import com.github.tomakehurst.wiremock.client.VerificationException;
 import com.github.tomakehurst.wiremock.client.WireMock;
 
+import static com.example.stocks.infrastructure.UrlMatchingStrategies.urlEndingWith;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
 
@@ -37,5 +38,13 @@ public class FakeHttpServer implements HttpServer {
     @Override
     public void stop() {
         server.stop();
+    }
+
+    public static void main(String[] args) {
+        FakeHttpServer server = new FakeHttpServer(8000);
+        server.start();
+        server.stub(urlEndingWith("/portfolio/0001"), aResponse()
+                .withHeader("Access-Control-Allow-Origin", "*")
+                .withBody("10999.99"));
     }
 }

@@ -9,6 +9,7 @@
         }
     </style>
     <script src="jquery-1.9.1.js"></script>
+    <script src="jquery-number-2.1.0.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
@@ -58,8 +59,7 @@ function requestValuation() {
     $.ajax({
         url: "http://localhost:8000/portfolio/0001",
         success: function (data) {
-            var value = parseFloat(data);
-            $('#requestValuationResult').html(value.toLocaleString());
+            $('#requestValuationResult').html($.number(data, 2));
         },
         error: function (XMLHttpRequest, textStatus, error) {
             console.log('Error GET portfolio/? ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
