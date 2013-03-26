@@ -28,8 +28,6 @@ public class PortfolioUiResponseTest {
     private final FakeHttpServer application = new FakeHttpServer(8000);
     private final LandingPage ui = new LandingPage();
 
-    private final static String expectedResponse = "10500.99";
-
     @Before
     public void start() {
         client.start();
@@ -39,14 +37,14 @@ public class PortfolioUiResponseTest {
     public void requestPortfolioValue() throws MalformedURLException {
         application.stub(urlEndingWith("/portfolio/0001"), aResponse()
                 .withHeader("Access-Control-Allow-Origin", "*")
-                .withBody(expectedResponse));
+                .withBody("10500.988"));
         ui.navigateToLandingPage().requestValuationForShares(100);
         verify(getRequestedFor(urlEndingWith("/portfolio/0001")));
     }
 
     public Boolean verifyPortfolioValue() throws InterruptedException {
         try {
-            ui.assertThatPortfolioValue(is(expectedResponse));
+            ui.assertThatPortfolioValue(is("10,500.99"));
         } catch (AssertionError e) {
             throw new AssertionError(ui.getErrorMessage() + ", \n" + e.getMessage());
         }
