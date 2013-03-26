@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
 import java.net.MalformedURLException;
 
 import static com.example.stocks.infrastructure.UrlMatchingStrategies.urlEndingWith;
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(ConcordionRunner.class)
@@ -39,7 +39,6 @@ public class PortfolioUiResponseTest {
                 .withHeader("Access-Control-Allow-Origin", "*")
                 .withBody("10500.988"));
         ui.navigateToLandingPage().requestValuationForShares(100);
-        verify(getRequestedFor(urlEndingWith("/portfolio/0001")));
     }
 
     public Boolean verifyPortfolioValue() throws InterruptedException {
