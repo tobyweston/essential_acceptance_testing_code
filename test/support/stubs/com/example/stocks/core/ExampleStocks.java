@@ -1,5 +1,7 @@
 package com.example.stocks.core;
 
+import static java.lang.String.format;
+
 public enum ExampleStocks implements Symbol {
 
     Apple("AAPL"),
@@ -10,6 +12,13 @@ public enum ExampleStocks implements Symbol {
 
     ExampleStocks(String symbol) {
         this.symbol = symbol;
+    }
+
+    public static Symbol fromSymbol(String symbol) {
+        for (ExampleStocks stock : values())
+            if (stock.toSymbol().equals(symbol))
+                return stock;
+        throw new RuntimeException(format("no example stock with symbol %s found", symbol));
     }
 
     @Override

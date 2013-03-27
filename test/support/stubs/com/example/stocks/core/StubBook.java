@@ -17,6 +17,11 @@ public class StubBook implements Book {
         return this;
     }
 
+    public StubBook add(NumberOfStocks numberOfStocks) {
+        positions.add(numberOfStocks);
+        return this;
+    }
+
     @Override
     public Iterator<Position> iterator() {
         return positions.iterator();
