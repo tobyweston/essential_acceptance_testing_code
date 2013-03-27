@@ -26,12 +26,12 @@
 
 <h2>When</h2>
 <p>
-    The stock price for <b>AMZN</b> is requested
+    The Portfolio requests a stock price for <b concordion:set="#symbol">AMZN</b>
 </p>
 
 <h2>Then</h2>
 <p>
-    Yahoo is queried for <b concordion:assertEquals="">AMZN</b>
+    Market data is queried for <b concordion:assertEquals="verifySymbolCheckedWas(#symbol)">AMZN</b>
 </p>
 
 <div class="information">
