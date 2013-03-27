@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import static bad.robot.http.HttpClients.anApacheClient;
 import static bad.robot.http.configuration.Proxy.proxy;
 import static com.googlecode.totallylazy.URLs.url;
+import static java.lang.String.format;
 
 public class HttpClientFactory {
 
@@ -26,7 +27,7 @@ public class HttpClientFactory {
     public HttpClient createClient() {
         CommonHttpClient http = anApacheClient();
         if (configuration.useHttpProxy())
-            http.with(proxy(url(String.format("http://%s:%d", configuration.getHttpProxyHost(), configuration.getHttpProxyPort()))));
+            http.with(proxy(url(format("http://%s:%d", configuration.getHttpProxyHost(), configuration.getHttpProxyPort()))));
         return http;
     }
 }
