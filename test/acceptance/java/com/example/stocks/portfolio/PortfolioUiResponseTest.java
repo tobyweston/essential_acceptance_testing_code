@@ -16,7 +16,6 @@ import java.net.MalformedURLException;
 
 import static com.example.stocks.infrastructure.UrlMatchingStrategies.urlEndingWith;
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static org.hamcrest.Matchers.is;
 
 @RunWith(ConcordionRunner.class)
 @ExpectedToPass
@@ -39,13 +38,8 @@ public class PortfolioUiResponseTest {
         ui.navigateToLandingPage().requestValuationForShares(100);
     }
 
-    public Boolean verifyPortfolioValue() throws InterruptedException {
-        try {
-            ui.assertThatPortfolioValue(is("10,500.99"));
-        } catch (AssertionError e) {
-            throw new AssertionError(ui.getErrorMessage() + ", \n" + e.getMessage());
-        }
-        return true;
+    public String getPortfolioValue() throws InterruptedException {
+        return ui.getPortfolioValue();
     }
 
     @After

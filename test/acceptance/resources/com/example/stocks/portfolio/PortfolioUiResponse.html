@@ -73,9 +73,14 @@
     </p>
 </div>
 
+<h2>When</h2>
+<p>
+    The server is asked for the portfolio valuation
+</p>
+
 <h2>Then</h2>
 <p>
-    The server is asked for the portfolio valuation and that value is <span concordion:assertTrue="verifyPortfolioValue()">displayed on the UI as a comma separated number</span>
+    The value is displayed on the UI as <b concordion:assertEquals="getPortfolioValue()">10,500.98</b>
 </p>
 
 <div class="information">
