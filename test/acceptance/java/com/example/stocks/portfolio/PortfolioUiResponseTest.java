@@ -34,10 +34,8 @@ public class PortfolioUiResponseTest {
         application.start();
     }
 
-    public void requestPortfolioValue() throws MalformedURLException {
-        application.stub(urlEndingWith("/portfolio/0001"), aResponse()
-                .withHeader("Access-Control-Allow-Origin", "*")
-                .withBody("10500.988"));
+    public void requestPortfolioValue(String headerName, String headerValue, String body) throws MalformedURLException {
+        application.stub(urlEndingWith("/portfolio/0001"), aResponse().withHeader(headerName, headerValue).withBody(body));
         ui.navigateToLandingPage().requestValuationForShares(100);
     }
 

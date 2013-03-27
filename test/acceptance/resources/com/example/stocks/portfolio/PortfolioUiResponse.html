@@ -47,13 +47,31 @@
 
 <h2>Given</h2>
 <p>
-    The server responds with a valid valuation
+    The server responds with a valid valuation  <span class="more-details">[<a href="#" onclick="toggleDetails();">details</a>]</span>
 </p>
 
-<h2>When</h2>
-<p concordion:execute="requestPortfolioValue()">
-    When the user asks for the current portfolio valuation in the UI
-</p>
+<div class="details">
+    <div class="example">
+        <p>
+            The response from the server contains the header
+        </p>
+        <pre concordion:set="#headerName">Access-Control-Allow-Origin</pre>
+        <p>
+            with a value of
+        </p>
+        <pre concordion:set="#headerValue">*</pre>
+        <p>
+            and a body of
+        </p>
+        <pre concordion:set="#body">10500.988</pre>
+    </div>
+
+    <h2>When</h2>
+
+    <p concordion:execute="requestPortfolioValue(#headerName, #headerValue, #body)">
+        When the user asks for the current portfolio valuation in the UI
+    </p>
+</div>
 
 <h2>Then</h2>
 <p>
