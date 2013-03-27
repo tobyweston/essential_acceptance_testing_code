@@ -14,9 +14,12 @@ import org.jmock.Mockery;
 import org.jmock.integration.junit4.JUnit4Mockery;
 import org.junit.runner.RunWith;
 
+import static com.googlecode.totallylazy.matchers.Matchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 @RunWith(ConcordionRunner.class)
 @ExpectedToPass
-public class PortfolioHttpRequestTest {
+public class PortfolioValuationTest {
 
     @Extension public ConcordionExtension extension = new CopyResourcesToOutputFolder(this.getClass());
 
@@ -25,12 +28,13 @@ public class PortfolioHttpRequestTest {
     private final Valuation valuation = context.mock(Valuation.class);
     private final PortfolioResource portfolio = new PortfolioResource(valuation);
 
-    public String getTotalPortfolioValue() {
+    public boolean verifyValuationResponse() {
         context.checking(new Expectations() {{
-            oneOf(valuation).value(); will(returnValue(new Money("26185.00")));
+            oneOf(valuation).value(); will(returnValue(new Money("100000.00")));
         }});
 
         Response response = portfolio.value(null);
-        return response.entity().toString();
+        assertThat(response.entity().toString(), is("100000.00"));
+        return true;
     }
 }

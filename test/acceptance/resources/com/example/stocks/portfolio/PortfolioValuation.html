@@ -1,0 +1,61 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<head>
+    <title>Portfolio Valuation - HTTP Adapter to Java Message Test</title>
+    <link rel="stylesheet" href="../../../../concordion.css" type="text/css"/>
+    <link rel="stylesheet" href="../../../../style.css" type="text/css"/>
+    <script src="../../../../jquery-1.9.1.js">.</script>
+    <script type="text/javascript" src="../../../../specifications.js">.</script>
+</head>
+<body onload="toggleImplementationNotes(); toggleDetails();">
+<h1>Portfolio Valuation </h1>
+<h2>HTTP Adapter to Java Message Test <img style="cursor:pointer" onclick="toggleImplementationNotes();" src="../../../../info.jpg" width="18px" height="18px" alt="Implementations notes" name="Toggle details"/></h2>
+
+<div class="implementation-notes">
+    <div class="information">
+        <h3>Implementation notes</h3>
+        <p>
+            The <code>Portfolio</code>'s adapter is implemented in terms of HTTP; it's a RESTful server which
+            collaborates with this business interface directly. It turns the HTTP API into a Java API; we're testing that
+            a HTTP message turns into a Java message.
+        </p>
+        <p>
+            <img src="test-portfolio-valuation.png" width="400px" height="140px" border="1px"/>
+        </p>
+        <p>
+            This test is implemented with the assumption that RESTful infrastructure is tested elsewhere. That is to say,
+            rather than startup the server and send a real HTTP request from the test, the component it delegates to
+            (in our case the <code>PortfolioResource.java</code> class) is tested in isolation.
+        </p>
+        <p>
+            An alternative option is to startup the server and send a real HTTP message in but this could add overhead
+            when multiple scenarios need to be tested. In both cases, a test double can be used to verify the (HTTP) message
+            is translated in a Java message.
+        </p>
+        <p>
+            The calculation logic is not tested here.
+        </p>
+    </div>
+</div>
+
+<h2>When</h2>
+<p>
+    A HTTP request for a valuation is received
+</p>
+
+<h2>Then</h2>
+<p>
+    The total portfolio valuation will be <b concordion:assertTrue="verifyValuationResponse()">calculated a returned to the requester</b>
+</p>
+
+<div class="information">
+    <h3>Further information</h3>
+    <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="PortfolioUiRequest.html">Where does this request come from?</a></li>
+        <li><a href="PortfolioUiResponse.html">What does the response look like?</a></li>
+        <li><a href="PortfolioValuationCalculation.html">How does the portfolio calculate the total value?</a></li>
+    </ul>
+</div>
+
+</body>
+</html>
