@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.not;
 
 @RunWith(ConcordionRunner.class)
 @ExpectedToPass
-public class PortfolioUiRequestTest {
+public class UiPortfolioValueTest {
 
     @Extension public ConcordionExtension extension = new CopyResourcesToOutputFolder(this.getClass());
 

@@ -19,7 +19,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 
 @RunWith(ConcordionRunner.class)
 @ExpectedToPass
-public class PortfolioUiResponseTest {
+public class UiPortfolioValueDisplayTest {
 
     @Extension public ConcordionExtension extension = new CopyResourcesToOutputFolder(this.getClass());
 
