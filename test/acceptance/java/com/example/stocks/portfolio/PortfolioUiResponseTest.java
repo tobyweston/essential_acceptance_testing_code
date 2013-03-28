@@ -33,6 +33,7 @@ public class PortfolioUiResponseTest {
         application.start();
     }
 
+    // TODO don't input this from the test
     public void requestPortfolioValue(String headerName, String headerValue, String body) throws MalformedURLException {
         application.stub(urlEndingWith("/portfolio/0001"), aResponse().withHeader(headerName, headerValue).withBody(body));
         ui.navigateToLandingPage().requestValuationForShares(100);

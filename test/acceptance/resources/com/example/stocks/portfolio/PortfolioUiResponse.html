@@ -47,7 +47,7 @@
 
 <h2>Given</h2>
 <p>
-    The server responds with a valid valuation  <span class="more-details">[<a href="#" onclick="toggleDetails();">details</a>]</span>
+    A portfolio value of <b>10500.988</b> <span class="more-details">[<a href="#" onclick="toggleDetails();">details</a>]</span>
 </p>
 
 <div class="details">
@@ -75,12 +75,12 @@
 
 <h2>When</h2>
 <p>
-    The server is asked for the portfolio valuation
+    A user refreshes the portfolio page
 </p>
 
 <h2>Then</h2>
 <p>
-    The value is displayed on the UI as <b concordion:assertEquals="getPortfolioValue()">10,500.99</b>
+    The portfolio value is <a href="PortfolioUiRequest.html">requested</a> and displayed on the UI as <b concordion:assertEquals="getPortfolioValue()">10,500.99</b>
 </p>
 
 <div class="information">
