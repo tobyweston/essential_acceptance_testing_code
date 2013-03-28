@@ -42,7 +42,7 @@
 <h2>Then</h2>
 
 <p>
-    A <b concordion:assertEquals="verifyHttpGet()">request for the portfolio value is made</b> to the application  <span class="more-details">[<a href="#" onclick="toggleDetails();">details</a>]</span>
+    A <b concordion:assertEquals="verifyHttpGet()">request for the portfolio value is made</b> to the application and the <b concordion:assertTrue="verifyResponseReturned()">response is returned</b> <span class="more-details">[<a href="#" onclick="toggleDetails();">details</a>]</span>
 </p>
 
 <div class="details">
@@ -51,26 +51,6 @@
             A HTTP <code>GET</code> request is made to the system on the URL
         </p>
         <pre concordion:echo="#url"></pre>
-    </div>
-</div>
-
-<p>
-    and a valid the response is received and <a href="PortfolioUiResponse.html">displayed in the UI</a> <span class="more-details">[<a href="#" onclick="toggleDetails();">details</a>]</span>
-</p>
-
-<div class="details">
-    <div class="example">
-        <p>
-            An example response message might look like this
-        </p>
-        <pre>
-HTTP/1.1 200 OK
-Content-type: */*; charset="UTF-8"
-Content-length: 1
-Date: Sun, 24 Mar 2013 07:20:30 UTC
-
-10500.998
-        </pre>
     </div>
 </div>
 

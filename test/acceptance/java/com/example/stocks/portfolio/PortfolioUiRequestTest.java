@@ -15,6 +15,9 @@ import org.junit.runner.RunWith;
 import java.net.MalformedURLException;
 
 import static com.example.stocks.infrastructure.UrlMatchingStrategies.urlEndingWith;
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static org.hamcrest.Matchers.isEmptyOrNullString;
+import static org.hamcrest.Matchers.not;
 
 @RunWith(ConcordionRunner.class)
 @ExpectedToPass
@@ -35,6 +38,7 @@ public class PortfolioUiRequestTest {
     }
 
     public String requestPortfolioValue() throws MalformedURLException {
+        application.stub(urlEndingWith("/portfolio/0001"), aResponse().withHeader("Access-Control-Allow-Origin", "*").withBody("1000"));
         ui.navigateToLandingPage().requestValuationForShares(100);
         return expectedUrl;
     }
@@ -46,6 +50,11 @@ public class PortfolioUiRequestTest {
         } catch (AssertionError e) {
             return "request for the portfolio value was not made";
         }
+    }
+
+    public boolean verifyResponseReturned() throws InterruptedException {
+        ui.assertThatPortfolioValue(not(isEmptyOrNullString()));
+        return true;
     }
 
     @After
