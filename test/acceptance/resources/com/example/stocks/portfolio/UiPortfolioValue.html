@@ -21,13 +21,14 @@
             format and the HTTP response code verified to be 200 (OK).
         </p>
         <p>
-            <img src="test-ui-to-portfolio.png" width="400px" height="140px" border="1px"/>
+            <img src="test-ui-to-portfolio.png" width="400px" height="120px" border="1px"/>
         </p>
         <p>
             <ul>
-                <li>The web client is started up</li>
+                <li>The web UI is started up</li>
                 <li>The UI is used to click the 'request valuation' button</li>
-                <li>Using a fake "application", an expectation on a specific HTTP message is made and verfied</li>
+                <li>Using a fake "application", an expectation on a specific HTTP request is verified</li>
+                <li>How the UI uses a response is not part of this test, it verifies only that a response was received</li>
             </ul>
         </p>
     </div>
@@ -52,7 +53,7 @@
 <div class="details">
     <div class="example">
         <p>
-            A HTTP <code>GET</code> request is made to the system on the URL
+            A HTTP <code>GET</code> request is made to the following URL
         </p>
         <pre concordion:echo="#url"></pre>
     </div>

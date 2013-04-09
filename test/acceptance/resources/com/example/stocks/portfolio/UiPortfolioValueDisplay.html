@@ -30,10 +30,11 @@
         </p>
         <p>
             <ul>
-                <li>The web client is started up</li>
-                <li>The UI is used to click the 'request valuation' button</li>
+                <li>The web UI is started up</li>
+                <li>The UI is used to click the 'request valuation' button (we refer to this as <i>refreshing the page</i>)</li>
                 <li>Using a fake "application", a canned response is setup against a specific HTTP <code>GET</code> call</li>
-                <li>The canned response is verified as being displayed correctly within the UI (ie, the value 10,500.99</li>
+                <li>The canned response is verified as being displayed correctly within the UI (ie, the value 10,500.99)</li>
+                <li>The request however, is not verified. This is a subtle omission as it decouples the details of the <a href="UiPortfolioValue.html">request</a> from how a response is used by the UI</li>
             </ul>
         </p>
         <p>
@@ -48,6 +49,10 @@
         </p>
     </div>
 </div>
+
+<p>
+    When I ask for a portfolio value in the UI, it's displayed as intended.
+</p>
 
 <h2>Given</h2>
 <p>
