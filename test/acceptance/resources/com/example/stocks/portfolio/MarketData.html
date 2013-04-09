@@ -21,12 +21,16 @@
         <p>
             <img src="test-market-data.png" width="400px" height="140px" border="1px"/>
         </p>
+        <p>
+            Additional tests might exercise the system given a book containing multiple stocks or an empty book (indicating
+            that <code>Market Data</code> is not used).
+        </p>
     </div>
 </div>
 
 <h2>When</h2>
 <p>
-    The Portfolio requests a stock price for <b concordion:set="#symbol">AMZN</b>
+    A request for a valuation is received for a <a href="http://www.investopedia.com/terms/b/book.asp">book</a> containing <b concordion:set="#symbol">AMZN</b> stocks
 </p>
 
 <h2>Then</h2>
@@ -38,6 +42,8 @@
     <h3>Further information</h3>
     <ul>
         <li><a href="index.html">Overview</a></li>
+        <li>What if the book contains multiple stocks?</li>
+        <li>What if the book is empty?</li>
         <li><a href="PortfolioValuation.html">How is the portfolio asked for a valuation?</a></li>
         <li><a href="PortfolioValuationCalculation.html">How is the price returned by Market Data used to calculate the portfolio value?</a></li>
     </ul>
