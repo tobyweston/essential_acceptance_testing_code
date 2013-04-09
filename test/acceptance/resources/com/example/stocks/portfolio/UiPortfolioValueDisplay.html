@@ -20,7 +20,7 @@
             would like to test the UI without testing the backend.
         </p>
         <p>
-            <img src="test-ui-to-portfolio.png" width="400px" height="140px" border="1px"/>
+            <img src="test-ui-to-portfolio.png" width="400px" height="120px" border="1px"/>
         </p>
         <p>
             The UI has an adapter to the <code>Portfolio</code> component. In production, the specific implementation of
@@ -33,14 +33,18 @@
                 <li>The web client is started up</li>
                 <li>The UI is used to click the 'request valuation' button</li>
                 <li>Using a fake "application", a canned response is setup against a specific HTTP <code>GET</code> call</li>
-                <li>The canned response is verified as being displayed correctly within the UI</li>
+                <li>The canned response is verified as being displayed correctly within the UI (ie, the value 10,500.99</li>
             </ul>
         </p>
         <p>
             In this test, we fake out the server (application) component so that the UI uses JQuery to make a a real
             HTTP request that we can intercept and make assertions against. An alternative however would be to front
-            the JQuery call behind our own interface (port) and substitute this for testing. That way, we can exercise
-            the port without making a real HTTP call.
+            the JQuery call behind our own JavaScript interface (port) and substitute this for testing. That way, we can
+            exercise the port without making a real HTTP call.
+        </p>
+        <p>
+            Part of the UI's responsibility is to is to format the response correctly and do any rounding. It's
+            implemented using JavaScript on the client and is tested as part of this test.
         </p>
     </div>
 </div>
