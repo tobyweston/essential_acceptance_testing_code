@@ -34,7 +34,7 @@
                 <li>The UI is used to click the 'request valuation' button (we refer to this as <i>refreshing the page</i>)</li>
                 <li>Using a fake "application", a canned response is setup against a specific HTTP <code>GET</code> call</li>
                 <li>The canned response is verified as being displayed correctly within the UI (ie, the value 10,500.99)</li>
-                <li>The request however, is not verified. This is a subtle omission as it decouples the details of the <a href="UiPortfolioValue.html">request</a> from how a response is used by the UI</li>
+                <li>The request however, is not verified. This is a subtle omission as it decouples the details of the <a href="UiPortfolioValueRequest.html">request</a> from how a response is used by the UI</li>
             </ul>
         </p>
         <p>
@@ -89,14 +89,14 @@
 
 <h2>Then</h2>
 <p>
-    The portfolio value is <a href="UiPortfolioValue.html">requested</a> and displayed on the UI as <b concordion:assertEquals="getPortfolioValue()">10,500.99</b>
+    The portfolio value is <a href="UiPortfolioValueRequest.html">requested</a> and displayed on the UI as <b concordion:assertEquals="getPortfolioValue()">10,500.99</b>
 </p>
 
 <div class="information">
     <h3>Further information</h3>
     <ul>
         <li><a href="index.html">Overview</a></li>
-        <li><a href="UiPortfolioValue.html">What does the request from the client to the server look like?</a></li>
+        <li><a href="UiPortfolioValueRequest.html">What does the request from the client to the server look like?</a></li>
     </ul>
 </div>
 
