@@ -15,8 +15,8 @@ import org.jmock.Mockery;
 import org.jmock.integration.junit4.JUnit4Mockery;
 import org.junit.runner.RunWith;
 
-import static com.example.stocks.core.ExampleStocks.Amazon;
 import static com.example.stocks.core.ExampleStocks.fromSymbol;
+import static org.concordion.api.MultiValueResult.multiValueResult;
 
 @RunWith(ConcordionRunner.class)
 @ExpectedToPass
@@ -27,14 +27,17 @@ public class MarketDataTest {
     private final Mockery context = new JUnit4Mockery();
 
     private final MarketData marketData = context.mock(MarketData.class);
-    private final Portfolio portfolio = new Portfolio(new StubBook().add(Amazon), marketData);
+    private final StubBook book = new StubBook();
+    private final Portfolio portfolio = new Portfolio(book, marketData);
 
     public MultiValueResult verifySymbolCheckedWas(final String firstSymbol, final String secondSymbol) {
+        book.add(fromSymbol(firstSymbol)).add(fromSymbol(secondSymbol));
         context.checking(new Expectations() {{
             oneOf(marketData).getPrice(fromSymbol(firstSymbol)); will(returnValue(new Money(100)));
             oneOf(marketData).getPrice(fromSymbol(secondSymbol)); will(returnValue(new Money(200)));
         }});
         portfolio.value();
-        return MultiValueResult.multiValueResult().with("firstSymbol", firstSymbol).with("secondSymbol", secondSymbol);
+        context.assertIsSatisfied();
+        return multiValueResult().with("firstSymbol", firstSymbol).with("secondSymbol", secondSymbol);
     }
 }
