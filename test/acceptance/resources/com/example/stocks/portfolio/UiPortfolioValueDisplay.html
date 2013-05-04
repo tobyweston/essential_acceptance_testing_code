@@ -74,16 +74,10 @@
         </p>
         <pre concordion:set="#body">10500.988</pre>
     </div>
-
-    <h2>When</h2>
-
-    <p concordion:execute="requestPortfolioValue(#headerName, #headerValue, #body)">
-        When the user asks for the current portfolio valuation in the UI
-    </p>
 </div>
 
 <h2>When</h2>
-<p>
+<p concordion:execute="requestPortfolioValue(#headerName, #headerValue, #body)">
     A user refreshes the portfolio page
 </p>
 
