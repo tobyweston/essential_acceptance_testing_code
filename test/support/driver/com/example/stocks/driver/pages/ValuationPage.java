@@ -22,7 +22,7 @@ import static com.google.code.tempusfugit.temporal.WaitFor.waitOrTimeout;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.hamcrest.Matchers.not;
 
-public class ValuationPage {
+public class ValuationPage implements Page {
 
     private final WebDriver driver;
 

@@ -7,10 +7,15 @@ public class Browser {
 
     private final WebDriver driver = Selenium.createWebDriverForPlatform();
 
-    public ValuationPage navigateToLandingPage() {
-        driver.get("http://localhost:7000/index.html");
-        Selenium.verifyPageTitle(driver, "Value your Portfolio");
-        return new ValuationPage(driver);
+    private Page currentPage;
+
+    public ValuationPage valuationPage() {
+        if (currentPage == null) {
+            driver.get("http://localhost:7000/index.html");
+            Selenium.verifyPageTitle(driver, "Value your Portfolio");
+            currentPage = new ValuationPage(driver);
+        }
+        return (ValuationPage) currentPage;
     }
 
     public void quit() {
