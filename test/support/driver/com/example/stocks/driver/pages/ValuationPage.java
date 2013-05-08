@@ -13,8 +13,8 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.TimeoutException;
 
-import static com.example.stocks.driver.pages.LandingPage.Probes.errorMessage;
-import static com.example.stocks.driver.pages.LandingPage.Probes.portfolioValuation;
+import static com.example.stocks.driver.pages.ValuationPage.Probes.errorMessage;
+import static com.example.stocks.driver.pages.ValuationPage.Probes.portfolioValuation;
 import static com.google.code.tempusfugit.temporal.Duration.seconds;
 import static com.google.code.tempusfugit.temporal.Timeout.timeout;
 import static com.google.code.tempusfugit.temporal.WaitFor.waitFor;
@@ -22,23 +22,22 @@ import static com.google.code.tempusfugit.temporal.WaitFor.waitOrTimeout;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.hamcrest.Matchers.not;
 
-public class LandingPage {
+public class ValuationPage {
 
-    private final WebDriver driver = Selenium.createWebDriverForPlatform();
+    private final WebDriver driver;
 
-    public LandingPage navigateToLandingPage() {
-        driver.get("http://localhost:7000/index.html");
+    public ValuationPage(WebDriver driver) {
         Selenium.verifyPageTitle(driver, "Value your Portfolio");
-        return this;
+        this.driver = driver;
     }
 
-    public LandingPage requestValuationForShares(Integer numberOfShares) {
+    public ValuationPage requestValuationForShares(Integer numberOfShares) {
         driver.findElement(By.id("inputNumberOfShares")).sendKeys(numberOfShares.toString());
         driver.findElement(By.id("requestValuation")).click();
         return this;
     }
 
-    public LandingPage assertThatPortfolioValue(Matcher<String> matcher) throws InterruptedException {
+    public ValuationPage assertThatPortfolioValue(Matcher<String> matcher) throws InterruptedException {
         waitFor(assertion(portfolioValuation(driver), matcher), timeout(seconds(5)));
         return this;
     }
@@ -53,10 +52,6 @@ public class LandingPage {
 
     private static <T> SelfDescribingCondition assertion(Callable<T, RuntimeException> actual, Matcher<T> matcher) {
         return new SelfDescribingMatcherCondition(actual, matcher);
-    }
-
-    public void quit() {
-        Selenium.stop(driver);
     }
 
     private static String waitForValueFrom(ProbeFor<String> probe) throws InterruptedException {

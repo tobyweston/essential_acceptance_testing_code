@@ -1,7 +1,8 @@
 package com.example.stocks.portfolio;
 
 import com.example.stocks.CopyResourcesToOutputFolder;
-import com.example.stocks.driver.pages.LandingPage;
+import com.example.stocks.driver.pages.Browser;
+import com.example.stocks.driver.pages.ValuationPage;
 import com.example.stocks.infrastructure.HttpServer;
 import com.example.stocks.infrastructure.client.UiServer;
 import org.concordion.api.ExpectedToPass;
@@ -25,7 +26,8 @@ public class UiPortfolioValueDisplayTest {
 
     private final HttpServer ui = new UiServer();
     private final FakeHttpServer application = new FakeHttpServer(8000);
-    private final LandingPage browser = new LandingPage();
+    private final Browser browser = new Browser();
+    private final ValuationPage valuationPage = browser.navigateToLandingPage();
 
     @Before
     public void start() {
@@ -35,11 +37,11 @@ public class UiPortfolioValueDisplayTest {
 
     public void requestPortfolioValue(String headerName, String headerValue, String body) throws MalformedURLException {
         application.stub(urlEndingWith("/portfolio/0001"), aResponse().withHeader(headerName, headerValue).withBody(body));
-        browser.navigateToLandingPage().requestValuationForShares(100);
+        valuationPage.requestValuationForShares(100);
     }
 
     public String getPortfolioValue() throws InterruptedException {
-        return browser.getPortfolioValue();
+        return valuationPage.getPortfolioValue();
     }
 
     @After

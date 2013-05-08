@@ -1,6 +1,6 @@
 package com.example.stocks.core;
 
-import com.example.stocks.driver.pages.LandingPage;
+import com.example.stocks.driver.pages.Browser;
 import com.example.stocks.infrastructure.HttpServer;
 import com.example.stocks.infrastructure.UterllyidleExceptionRule;
 import com.example.stocks.infrastructure.client.UiServer;
@@ -37,7 +37,7 @@ public class PortfolioSystemTest {
         private final HttpServer ui = new UiServer();
         private final Server application = ApplicationFixture.applicationWithFakeYahoo();
         private final FakeYahoo fakeYahoo = new FakeYahoo();
-        private final LandingPage browser = new LandingPage();
+        private final Browser browser = new Browser();
 
         @Before
         public void startServers() {
@@ -70,7 +70,7 @@ public class PortfolioSystemTest {
 
         private final HttpServer ui = new UiServer();
         private final HttpServer application = ApplicationFixture.applicationWithRealYahoo();
-        private final LandingPage browser = new LandingPage();
+        private final Browser browser = new Browser();
 
         @Before
         public void startServers() {
