@@ -2,6 +2,7 @@ package com.example.stocks.infrastructure.yahoo;
 
 import bad.robot.http.HttpClient;
 import bad.robot.http.HttpResponse;
+import com.example.stocks.infrastructure.Defect;
 import com.example.stocks.infrastructure.http.HttpResponseException;
 
 import java.io.IOException;
@@ -38,7 +39,7 @@ public class YqlWebService implements Yahoo {
         try {
             return new URL(format(queryTemplate, url, encode(yql, "UTF-8")));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new Defect(e);
         }
     }
 }

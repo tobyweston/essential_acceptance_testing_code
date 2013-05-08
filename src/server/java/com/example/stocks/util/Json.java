@@ -1,5 +1,6 @@
 package com.example.stocks.util;
 
+import com.example.stocks.infrastructure.Defect;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -12,7 +13,7 @@ public class Json {
         try {
             this.root = (JSONObject) new JSONParser().parse(json);
         } catch (ParseException e) {
-            throw new RuntimeException(e);
+            throw new Defect(e);
         }
     }
 

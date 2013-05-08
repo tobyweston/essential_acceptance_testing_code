@@ -2,6 +2,7 @@ package com.example.stocks.infrastructure.yahoo;
 
 import com.example.stocks.core.Money;
 import com.example.stocks.core.Stock;
+import com.example.stocks.infrastructure.Defect;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -14,7 +15,7 @@ public class YahooStockResponseJson implements Stock {
         try {
             this.root = (JSONObject) new JSONParser().parse(json);
         } catch (ParseException e) {
-            throw new RuntimeException(e);
+            throw new Defect(e);
         }
     }
 

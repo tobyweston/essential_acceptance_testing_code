@@ -1,5 +1,6 @@
 package com.example.stocks.driver;
 
+import com.example.stocks.infrastructure.Defect;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -29,7 +30,7 @@ public class Selenium {
 
     public static void verifyPageTitle(WebDriver driver, String pageTitle) {
         if (!driver.getTitle().equals(pageTitle))
-            throw new RuntimeException(format("current page was expected to be '%s' but was '%s'", pageTitle, driver.getTitle()));
+            throw new Defect(format("current page was expected to be '%s' but was '%s'", pageTitle, driver.getTitle()));
     }
 
     public static void stop(WebDriver driver) {

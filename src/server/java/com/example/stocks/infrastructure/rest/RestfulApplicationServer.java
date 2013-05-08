@@ -1,6 +1,7 @@
 package com.example.stocks.infrastructure.rest;
 
 import com.example.stocks.core.Valuation;
+import com.example.stocks.infrastructure.Defect;
 import com.example.stocks.infrastructure.HttpServer;
 import com.example.stocks.infrastructure.server.PortfolioBuilder;
 import com.googlecode.utterlyidle.Application;
@@ -38,7 +39,7 @@ public class RestfulApplicationServer implements HttpServer {
             ServerConfiguration configuration = defaultConfiguration().port(port);
             server = new RestServer(application, configuration);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new Defect(e);
         }
     }
 
@@ -47,7 +48,7 @@ public class RestfulApplicationServer implements HttpServer {
         try {
             server.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new Defect(e);
         }
     }
 

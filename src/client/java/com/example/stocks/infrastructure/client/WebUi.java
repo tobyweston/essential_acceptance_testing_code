@@ -1,5 +1,6 @@
 package com.example.stocks.infrastructure.client;
 
+import com.example.stocks.infrastructure.Defect;
 import com.example.stocks.infrastructure.HttpServer;
 import com.googlecode.utterlyidle.Application;
 import com.googlecode.utterlyidle.ServerConfiguration;
@@ -25,7 +26,7 @@ public class WebUi implements HttpServer {
             ServerConfiguration configuration = defaultConfiguration().port(port);
             server = new RestServer(application, configuration);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new Defect(e);
         }
     }
 
@@ -34,7 +35,7 @@ public class WebUi implements HttpServer {
         try {
             server.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new Defect(e);
         }
     }
 
