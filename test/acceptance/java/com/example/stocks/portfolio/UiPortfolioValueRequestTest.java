@@ -3,7 +3,7 @@ package com.example.stocks.portfolio;
 import com.example.stocks.CopyResourcesToOutputFolder;
 import com.example.stocks.driver.pages.LandingPage;
 import com.example.stocks.infrastructure.HttpServer;
-import com.example.stocks.infrastructure.client.WebUi;
+import com.example.stocks.infrastructure.client.UiServer;
 import org.concordion.api.ExpectedToPass;
 import org.concordion.api.extension.ConcordionExtension;
 import org.concordion.api.extension.Extension;
@@ -25,21 +25,21 @@ public class UiPortfolioValueRequestTest {
 
     @Extension public ConcordionExtension extension = new CopyResourcesToOutputFolder(this.getClass());
 
-    private final HttpServer client = new WebUi();
+    private final HttpServer ui = new UiServer();
     private final FakeHttpServer application = new FakeHttpServer(8000);
-    private final LandingPage ui = new LandingPage();
+    private final LandingPage browser = new LandingPage();
 
     private final static String expectedUrl = "/portfolio/0001";
 
     @Before
     public void start() {
-        client.start();
+        ui.start();
         application.start();
     }
 
     public String requestPortfolioValue() throws MalformedURLException {
         application.stub(urlEndingWith("/portfolio/0001"), aResponse().withHeader("Access-Control-Allow-Origin", "*").withBody("1000"));
-        ui.navigateToLandingPage().requestValuationForShares(100);
+        browser.navigateToLandingPage().requestValuationForShares(100);
         return expectedUrl;
     }
 
@@ -53,15 +53,15 @@ public class UiPortfolioValueRequestTest {
     }
 
     public boolean verifyResponseReturned() throws InterruptedException {
-        ui.assertThatPortfolioValue(not(isEmptyOrNullString()));
+        browser.assertThatPortfolioValue(not(isEmptyOrNullString()));
         return true;
     }
 
     @After
     public void stop() {
-        client.stop();
+        ui.stop();
         application.stop();
-        ui.quit();
+        browser.quit();
     }
 
 }

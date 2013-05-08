@@ -3,7 +3,7 @@ package com.example.stocks.core;
 import com.example.stocks.driver.pages.LandingPage;
 import com.example.stocks.infrastructure.HttpServer;
 import com.example.stocks.infrastructure.UterllyidleExceptionRule;
-import com.example.stocks.infrastructure.client.WebUi;
+import com.example.stocks.infrastructure.client.UiServer;
 import com.example.stocks.infrastructure.server.Server;
 import org.junit.After;
 import org.junit.Before;
@@ -34,14 +34,14 @@ public class PortfolioSystemTest {
             }
         };
 
-        private final HttpServer client = new WebUi();
+        private final HttpServer ui = new UiServer();
         private final Server application = ApplicationFixture.applicationWithFakeYahoo();
         private final FakeYahoo fakeYahoo = new FakeYahoo();
-        private final LandingPage ui = new LandingPage();
+        private final LandingPage browser = new LandingPage();
 
         @Before
         public void startServers() {
-            client.start();
+            ui.start();
             application.start();
             fakeYahoo.start();
         }
@@ -50,44 +50,44 @@ public class PortfolioSystemTest {
         public void shouldRetrieveValuation() throws TimeoutException, InterruptedException {
             String response = "{\"query\":{\"results\":{\"quote\":{\"Close\":\"200.10\"}}}}";
             fakeYahoo.stub(urlStartingWith("/v1/public/yql"), aResponse().withBody(response));
-            ui.navigateToLandingPage().requestValuationForShares(100).assertThatPortfolioValue(is("400.20"));
+            browser.navigateToLandingPage().requestValuationForShares(100).assertThatPortfolioValue(is("400.20"));
         }
 
         private void stopServers() {
-            client.stop();
+            ui.stop();
             application.stop();
             fakeYahoo.stop();
         }
 
         @After
         public void quitTheBrowser() {
-            ui.quit();
+            browser.quit();
         }
 
     }
 
     public static class PortfolioSystemTestWithRealYahoo {
 
-        private final HttpServer client = new WebUi();
-        private final Server application = ApplicationFixture.applicationWithRealYahoo();
-        private final LandingPage ui = new LandingPage();
+        private final HttpServer ui = new UiServer();
+        private final HttpServer application = ApplicationFixture.applicationWithRealYahoo();
+        private final LandingPage browser = new LandingPage();
 
         @Before
         public void startServers() {
-            client.start();
+            ui.start();
             application.start();
         }
 
         @Test
         public void shouldRetrieveValuation() throws MalformedURLException, InterruptedException {
-            ui.navigateToLandingPage().requestValuationForShares(100).assertThatPortfolioValue(is("903.83"));
+            browser.navigateToLandingPage().requestValuationForShares(100).assertThatPortfolioValue(is("903.83"));
         }
 
         @After
         public void stopServer() {
-            client.stop();
+            ui.stop();
             application.stop();
-            ui.quit();
+            browser.quit();
         }
 
     }

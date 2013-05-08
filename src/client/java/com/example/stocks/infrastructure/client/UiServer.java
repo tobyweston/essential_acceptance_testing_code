@@ -13,7 +13,7 @@ import static com.googlecode.totallylazy.Strings.EMPTY;
 import static com.googlecode.utterlyidle.ApplicationBuilder.application;
 import static com.googlecode.utterlyidle.ServerConfiguration.defaultConfiguration;
 
-public class WebUi implements HttpServer {
+public class UiServer implements HttpServer {
 
     public static final Integer port = 7000;
 
@@ -40,6 +40,6 @@ public class WebUi implements HttpServer {
     }
 
     public static void main(String... args) {
-        new WebUi().start();
+        new UiServer().start();
     }
 }

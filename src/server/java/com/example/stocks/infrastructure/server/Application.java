@@ -17,7 +17,7 @@ import static com.example.stocks.infrastructure.server.ApplicationBuilder.defaul
 import static com.example.stocks.infrastructure.server.HttpApplicationServerBuilder.defaultHttpServer;
 import static com.example.stocks.infrastructure.server.PortfolioBuilder.defaultPortfolio;
 
-public class Application implements Server {
+public class Application implements HttpServer {
 
     private final HttpServer server;
 
