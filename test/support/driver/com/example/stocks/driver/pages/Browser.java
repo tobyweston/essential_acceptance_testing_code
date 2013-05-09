@@ -23,7 +23,7 @@ public class Browser {
         return (ManagementPage) current;
     }
 
-    public SummaryPage gotoBaseUrl() {
+    private SummaryPage gotoBaseUrl() {
         driver.get("http://localhost:7000/index.html");
         return new SummaryPage(driver);
     }
