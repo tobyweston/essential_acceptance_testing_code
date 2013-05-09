@@ -1,6 +1,7 @@
 package com.example.stocks.driver;
 
-import com.example.stocks.infrastructure.Defect;
+import com.google.code.tempusfugit.temporal.ProbeFor;
+import org.hamcrest.Description;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,7 +12,11 @@ import org.openqa.selenium.safari.SafariDriver;
 
 import java.util.HashMap;
 
-import static java.lang.String.format;
+import static com.google.code.tempusfugit.condition.Conditions.assertion;
+import static com.google.code.tempusfugit.temporal.Duration.millis;
+import static com.google.code.tempusfugit.temporal.Timeout.timeout;
+import static com.google.code.tempusfugit.temporal.WaitFor.waitFor;
+import static org.hamcrest.Matchers.is;
 import static org.openqa.selenium.Platform.*;
 import static org.openqa.selenium.remote.CapabilityType.SUPPORTS_JAVASCRIPT;
 
@@ -29,8 +34,11 @@ public class Selenium {
     }
 
     public static void verifyPageTitle(WebDriver driver, String pageTitle) {
-        if (!driver.getTitle().equals(pageTitle))
-            throw new Defect(format("current page was expected to be '%s' but was '%s'", pageTitle, driver.getTitle()));
+        try {
+            waitFor(assertion(Probes.pageTitle(driver), is(pageTitle)), timeout(millis(250)));
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     public static void stop(WebDriver driver) {
@@ -61,6 +69,22 @@ public class Selenium {
         return new Proxy(new HashMap<String, Object>() {{
             put("httpProxy", "localhost:8888");
         }});
+    }
+
+    private static class Probes {
+        private static ProbeFor<String> pageTitle(final WebDriver driver) {
+            return new ProbeFor<String>() {
+                @Override
+                public String call() throws RuntimeException {
+                    return driver.getTitle();
+                }
+
+                @Override
+                public void describeTo(Description description) {
+                    description.appendText("page title");
+                }
+            };
+        }
     }
 
 }
