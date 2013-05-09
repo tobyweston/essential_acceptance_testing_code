@@ -3,6 +3,7 @@
 <head>
     <title>Portfolio Summary</title>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="style.css" rel="stylesheet" media="screen">
     <style>
         body {
             padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
@@ -16,61 +17,90 @@
 
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
-        <div class="container">
+        <div class="container-fluid">
             <a class="brand" href="index.html">Stock Portfolio</a>
             <ul class="nav">
                 <li class="active"><a id="navigate-to-summary" href="index.html">Summary</a></li>
-                <li><a id="navigate-to-management"href="manage.html">Manage</a></li>
+                <li><a id="navigate-to-management" href="manage.html">Manage</a></li>
             </ul>
         </div>
     </div>
 </div>
 
-<div class="container">
-    <p class="lead">Portfolio summary and valuation</p>
+<div class="container-fluid">
+    <p class="lead">Portfolio summary <a class="btn btn-link pull-right" href="">refresh</a></p>
 
-    <h2>NASDAQ: AMZN</h2>
-
-    <div>
-        <p>
-            <span id="price"><strong>265.74</strong></span>
-            <small>(yesterday)</small>
-            <small id="movement">-9.54</small>
-        </p>
-    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr class="info">
+                <td>Stock</td>
+                <td>Qty</td>
+                <td>Price</td>
+                <td>Change</td>
+                <td>Total</td>
+            </tr>
+        </thead>
+        <tr>
+            <td class=name>Amazon.com Inc. <span class="info">AMZN, Yesterday</span></td>
+            <td>100</td>
+            <td>267.74</td>
+            <td class="down">-9.54</td>
+            <td><p>26,774.00</p></td>
+        </tr>
+        <tr>
+            <td class=name>Apple Inc. <span class="info">AAPL, Apr 23, 4:00PM</span></td>
+            <td>33</td>
+            <td>267.74</td>
+            <td class="up">1.64</td>
+            <td><p>26,774.00</p></td>
+        </tr>
+        <tr>
+            <td class=name>Yahoo! Inc. <span class="info">YHOO, Apr 23, 4:00PM</span></td>
+            <td>120</td>
+            <td>267.74</td>
+            <td class="up">0.00</td>
+            <td><p>26,774.00</p></td>
+        </tr>
+        <tr>
+            <td id="grandtotal" colspan="5">
+                <p>43,101.89</p>
+            </td>
+        </tr>
+    </table>
 
     <form id="requestValuationForm" class="form-inline">
         <legend>Your Portfolio</legend>
 
-            <label class="control-label" for="inputNumberOfShares">Number of shares</label>
-            <input id="inputNumberOfShares" type="text" placeholder="10">
-            <label id="requestValuationResult" class="lead pull-right"></label>
+        <label class="control-label" for="inputNumberOfShares">Number of shares</label>
+        <input id="inputNumberOfShares" type="text" placeholder="10">
+        <label id="requestValuationResult" class="lead pull-right"></label>
     </form>
-    <button onclick="requestValuation();" id="requestValuation" class="btn btn-primary btn-large">Request valuation</button>
+    <button onclick="requestValuation();" id="requestValuation" class="btn btn-primary btn-large">Request valuation
+    </button>
     <div>
         <p style="margin-top:30px" id="requestValuationError" class="muted"></p>
     </div>
 </div>
 
 <script type="text/javascript">
-$('#requestValuationForm').on('submit', function (e) {
-    requestValuation();
-});
+    $('#requestValuationForm').on('submit', function (e) {
+        requestValuation();
+    });
 </script>
 
 <script type="text/javascript">
-function requestValuation() {
-    $.ajax({
-        url: "http://localhost:8000/portfolio/0001",
-        success: function (data) {
-            $('#requestValuationResult').html($.number(data, 2));
-        },
-        error: function (XMLHttpRequest, textStatus, error) {
-            console.log('Error GET portfolio/? ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
-            $('#requestValuationError').html('Error: ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
-        }
-    });
-}
+    function requestValuation() {
+        $.ajax({
+            url: "http://localhost:8000/portfolio/0001",
+            success: function (data) {
+                $('#requestValuationResult').html($.number(data, 2));
+            },
+            error: function (XMLHttpRequest, textStatus, error) {
+                console.log('Error GET portfolio/? ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
+                $('#requestValuationError').html('Error: ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
+            }
+        });
+    }
 </script>
 
 </body>
