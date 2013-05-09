@@ -3,23 +3,25 @@ package com.example.stocks.driver.pages;
 import com.example.stocks.driver.Selenium;
 import org.openqa.selenium.WebDriver;
 
-public class Browser {
+public class Browser implements NavigablePage {
 
     private final WebDriver driver = Selenium.createWebDriverForPlatform();
 
     private NavigablePage current;
 
-    public SummaryPage summaryPage() {
+    @Override
+    public SummaryPage navigateToSummaryPage() {
         if (current == null)
             current = gotoBaseUrl();
-        current = current.navigateToSummary();
+        current = current.navigateToSummaryPage();
         return (SummaryPage) current;
     }
 
-    public ManagementPage managementPage() {
+    @Override
+    public ManagementPage navigateToManagementPage() {
         if (current == null)
             current = gotoBaseUrl();
-        current = current.navigateToManagement();
+        current = current.navigateToManagementPage();
         return (ManagementPage) current;
     }
 
@@ -31,5 +33,4 @@ public class Browser {
     public void quit() {
         Selenium.stop(driver);
     }
-
 }

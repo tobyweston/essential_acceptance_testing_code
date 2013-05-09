@@ -39,7 +39,7 @@ public class UiPortfolioValueRequestTest {
 
     public String requestPortfolioValue() throws MalformedURLException {
         application.stub(urlEndingWith("/portfolio/0001"), aResponse().withHeader("Access-Control-Allow-Origin", "*").withBody("1000"));
-        browser.summaryPage().requestValuationForShares(100);
+        browser.navigateToSummaryPage().requestValuationForShares(100);
         return expectedUrl;
     }
 
@@ -53,7 +53,7 @@ public class UiPortfolioValueRequestTest {
     }
 
     public boolean verifyResponseReturned() throws InterruptedException {
-        browser.summaryPage().assertThatPortfolioValue(not(isEmptyOrNullString()));
+        browser.navigateToSummaryPage().assertThatPortfolioValue(not(isEmptyOrNullString()));
         return true;
     }
 

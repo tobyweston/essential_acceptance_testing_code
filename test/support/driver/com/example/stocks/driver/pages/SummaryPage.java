@@ -51,13 +51,13 @@ public class SummaryPage implements NavigablePage {
     }
 
     @Override
-    public SummaryPage navigateToSummary() {
+    public SummaryPage navigateToSummaryPage() {
         return this;
     }
 
     @Override
-    public ManagementPage navigateToManagement() {
-        new Navigation(driver).navigateToManagement();
+    public ManagementPage navigateToManagementPage() {
+        new Navigation(driver).navigateToManagementPage();
         return new ManagementPage(driver);
     }
 

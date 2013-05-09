@@ -12,13 +12,13 @@ class Navigation implements NavigablePage {
     }
 
     @Override
-    public NavigablePage navigateToSummary() {
+    public NavigablePage navigateToSummaryPage() {
         driver.findElement(By.id("navigate-to-summary")).click();
         return this;
     }
 
     @Override
-    public NavigablePage navigateToManagement() {
+    public NavigablePage navigateToManagementPage() {
         driver.findElement(By.id("navigate-to-management")).click();
         return this;
     }

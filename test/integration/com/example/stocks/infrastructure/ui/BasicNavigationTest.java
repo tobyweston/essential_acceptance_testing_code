@@ -21,26 +21,26 @@ public class BasicNavigationTest {
 
     @Test
     public void canDoBasicNavigation() {
-        browser.summaryPage().navigateToManagement().navigateToSummary();
+        browser.navigateToSummaryPage().navigateToManagementPage().navigateToSummaryPage();
     }
 
     @Test
     public void canNavigateFromSummaryToManagementPageAndPerformPageOperations() {
-        browser.summaryPage().navigateToManagement().sell();
+        browser.navigateToSummaryPage().navigateToManagementPage().sell();
     }
 
     @Test
     public void canNavigateFromManagementToSummaryPageAndPerformPageOperations() throws InterruptedException {
-        browser.managementPage().navigateToSummary().getPortfolioValue();
+        browser.navigateToManagementPage().navigateToSummaryPage().getPortfolioValue();
     }
 
     @Test
     public void canTrustBrowserObjectToRetainContextAllowingFlexibleNavigation() throws InterruptedException {
-        browser.managementPage().sell();
-        browser.summaryPage().getPortfolioValue();
-        browser.managementPage().sell();
-        browser.summaryPage().getPortfolioValue();
-        browser.managementPage().sell().navigateToSummary().assertThatPortfolioValue(is("")).navigateToManagement().buy();
+        browser.navigateToManagementPage().sell();
+        browser.navigateToSummaryPage().getPortfolioValue();
+        browser.navigateToManagementPage().sell();
+        browser.navigateToSummaryPage().getPortfolioValue();
+        browser.navigateToManagementPage().sell().navigateToSummaryPage().assertThatPortfolioValue(is("")).navigateToManagementPage().buy();
     }
 
     @After

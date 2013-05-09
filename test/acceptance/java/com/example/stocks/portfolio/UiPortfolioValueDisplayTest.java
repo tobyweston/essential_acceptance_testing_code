@@ -35,11 +35,11 @@ public class UiPortfolioValueDisplayTest {
 
     public void requestPortfolioValue(String headerName, String headerValue, String body) throws MalformedURLException {
         application.stub(urlEndingWith("/portfolio/0001"), aResponse().withHeader(headerName, headerValue).withBody(body));
-        browser.summaryPage().requestValuationForShares(100);
+        browser.navigateToSummaryPage().requestValuationForShares(100);
     }
 
     public String getPortfolioValue() throws InterruptedException {
-        return browser.summaryPage().getPortfolioValue();
+        return browser.navigateToSummaryPage().getPortfolioValue();
     }
 
     @After
