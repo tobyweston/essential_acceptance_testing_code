@@ -13,8 +13,8 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.TimeoutException;
 
-import static com.example.stocks.driver.pages.ValuationPage.Probes.errorMessage;
-import static com.example.stocks.driver.pages.ValuationPage.Probes.portfolioValuation;
+import static com.example.stocks.driver.pages.SummaryPage.Probes.errorMessage;
+import static com.example.stocks.driver.pages.SummaryPage.Probes.portfolioValuation;
 import static com.google.code.tempusfugit.temporal.Duration.seconds;
 import static com.google.code.tempusfugit.temporal.Timeout.timeout;
 import static com.google.code.tempusfugit.temporal.WaitFor.waitFor;
@@ -22,22 +22,22 @@ import static com.google.code.tempusfugit.temporal.WaitFor.waitOrTimeout;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.hamcrest.Matchers.not;
 
-public class ValuationPage implements Page {
+public class SummaryPage implements Page, Navigable {
 
     private final WebDriver driver;
 
-    public ValuationPage(WebDriver driver) {
-        Selenium.verifyPageTitle(driver, "Value your Portfolio");
+    public SummaryPage(WebDriver driver) {
+        Selenium.verifyPageTitle(driver, "Portfolio Summary");
         this.driver = driver;
     }
 
-    public ValuationPage requestValuationForShares(Integer numberOfShares) {
+    public SummaryPage requestValuationForShares(Integer numberOfShares) {
         driver.findElement(By.id("inputNumberOfShares")).sendKeys(numberOfShares.toString());
         driver.findElement(By.id("requestValuation")).click();
         return this;
     }
 
-    public ValuationPage assertThatPortfolioValue(Matcher<String> matcher) throws InterruptedException {
+    public SummaryPage assertThatPortfolioValue(Matcher<String> matcher) throws InterruptedException {
         waitFor(assertion(portfolioValuation(driver), matcher), timeout(seconds(5)));
         return this;
     }
@@ -48,6 +48,17 @@ public class ValuationPage implements Page {
 
     public String getErrorMessage() throws InterruptedException {
         return waitForValueFrom(errorMessage(driver));
+    }
+
+    @Override
+    public SummaryPage navigateToSummary() {
+        return this;
+    }
+
+    @Override
+    public ManagementPage navigateToManagement() {
+        new Navigation(driver).navigateToManagement();
+        return new ManagementPage(driver);
     }
 
     private static <T> SelfDescribingCondition assertion(Callable<T, RuntimeException> actual, Matcher<T> matcher) {

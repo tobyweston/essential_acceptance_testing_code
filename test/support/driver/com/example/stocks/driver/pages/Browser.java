@@ -7,17 +7,25 @@ public class Browser {
 
     private final WebDriver driver = Selenium.createWebDriverForPlatform();
 
-    private Page currentPage;
+    private Navigable current;
 
-    public ValuationPage valuationPage() {
-        if (currentPage == null)
-            currentPage = gotoValuationPageUrl();
-        return (ValuationPage) currentPage;
+    public SummaryPage summaryPage() {
+        if (current == null)
+            current = gotoBaseUrl();
+        current = (Navigable) current.navigateToSummary();
+        return (SummaryPage) current;
     }
 
-    private ValuationPage gotoValuationPageUrl() {
+    public ManagementPage managementPage() {
+        if (current == null)
+            current = gotoBaseUrl();
+        current = (Navigable) current.navigateToManagement();
+        return (ManagementPage) current;
+    }
+
+    public SummaryPage gotoBaseUrl() {
         driver.get("http://localhost:7000/index.html");
-        return new ValuationPage(driver);
+        return new SummaryPage(driver);
     }
 
     public void quit() {
