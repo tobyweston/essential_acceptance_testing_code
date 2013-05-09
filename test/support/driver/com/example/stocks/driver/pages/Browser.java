@@ -7,19 +7,19 @@ public class Browser {
 
     private final WebDriver driver = Selenium.createWebDriverForPlatform();
 
-    private Navigable current;
+    private NavigablePage current;
 
     public SummaryPage summaryPage() {
         if (current == null)
             current = gotoBaseUrl();
-        current = (Navigable) current.navigateToSummary();
+        current = current.navigateToSummary();
         return (SummaryPage) current;
     }
 
     public ManagementPage managementPage() {
         if (current == null)
             current = gotoBaseUrl();
-        current = (Navigable) current.navigateToManagement();
+        current = current.navigateToManagement();
         return (ManagementPage) current;
     }
 

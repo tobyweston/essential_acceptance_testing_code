@@ -3,7 +3,7 @@ package com.example.stocks.driver.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-class Navigation implements Page, Navigable {
+class Navigation implements NavigablePage {
 
     private final WebDriver driver;
 
@@ -12,13 +12,13 @@ class Navigation implements Page, Navigable {
     }
 
     @Override
-    public Page navigateToSummary() {
+    public NavigablePage navigateToSummary() {
         driver.findElement(By.id("navigate-to-summary")).click();
         return this;
     }
 
     @Override
-    public Page navigateToManagement() {
+    public NavigablePage navigateToManagement() {
         driver.findElement(By.id("navigate-to-management")).click();
         return this;
     }

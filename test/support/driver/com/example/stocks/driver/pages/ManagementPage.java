@@ -3,7 +3,7 @@ package com.example.stocks.driver.pages;
 import com.example.stocks.driver.Selenium;
 import org.openqa.selenium.WebDriver;
 
-public class ManagementPage implements Page, Navigable {
+public class ManagementPage implements NavigablePage {
 
     private final WebDriver driver;
 
