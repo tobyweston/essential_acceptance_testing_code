@@ -11,13 +11,12 @@ public class Browser {
 
     public ValuationPage valuationPage() {
         if (currentPage == null)
-            currentPage = navigateToValuationPage();
+            currentPage = gotoValuationPageUrl();
         return (ValuationPage) currentPage;
     }
 
-    private ValuationPage navigateToValuationPage() {
+    private ValuationPage gotoValuationPageUrl() {
         driver.get("http://localhost:7000/index.html");
-        Selenium.verifyPageTitle(driver, "Value your Portfolio");
         return new ValuationPage(driver);
     }
 
