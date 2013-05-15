@@ -62,7 +62,7 @@ body>header>h1 {
 	margin-bottom: 0;
 }
 
-#grandtotal p {
+#grandtotal {
 	font-size: 2em;
 	font-weight: bold;
 	text-align: right;
