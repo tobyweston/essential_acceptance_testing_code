@@ -4,6 +4,9 @@ import com.example.stocks.infrastructure.server.Server;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import com.github.tomakehurst.wiremock.client.UrlMatchingStrategy;
+import com.github.tomakehurst.wiremock.verification.LoggedRequest;
+
+import java.util.List;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
@@ -24,9 +27,12 @@ public class FakeYahoo implements Server {
         stubFor(get(urlMatchingStrategy).willReturn(response));
     }
 
+    public List<LoggedRequest> requestsForHttpGet(UrlMatchingStrategy urlMatchingStrategy) {
+        return findAll(getRequestedFor(urlMatchingStrategy));
+    }
+
     @Override
     public void stop() {
         server.stop();
     }
-
 }

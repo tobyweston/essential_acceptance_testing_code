@@ -1,4 +1,4 @@
-<html>
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
 <head>
     <title>Portfolio Valuation - Market data test</title>
     <link rel="stylesheet" href="../../../../concordion.css" type="text/css"/>
@@ -8,16 +8,20 @@
 </head>
 <body onload="toggleImplementationNotes(); toggleDetails();">
 <h1>Portfolio Valuation </h1>
-<h2>Market Data Test <img style="cursor:pointer" onclick="toggleImplementationNotes();" src="../../../../info.jpg" width="18px" height="18px" alt="Implementations notes" name="Toggle details"/></h2>
+
+<h2>Market Data Test <img style="cursor:pointer" onclick="toggleImplementationNotes();" src="../../../../info.jpg"
+                          width="18px" height="18px" alt="Implementations notes" name="Toggle details"/></h2>
 
 <div class="implementation-notes">
     <div class="information">
         <h3>Implementation notes</h3>
+
         <p>
             This test exercises the Yahoo <code>Market Data</code> adapter to make a call to real Yahoo. The purpose of
             this test is to confirm that our assumptions about the Yahoo API are correct. For example, if Yahoo change
             the YQL string required to request stock prices, this test would start to fail.
         </p>
+
         <p>
             <img src="test-yahoo.png" width="400px" height="140px" border="1px"/>
         </p>
@@ -25,18 +29,20 @@
 </div>
 
 <h2>When</h2>
+
 <p>
-    The price for <b>AMZN</b> is requested by the portfolio for the date <b>26th March 2013</b>
+    The price for <b concordion:set="#symbol">AMZN</b> is requested by the portfolio for the date <b concordion:set="#date">March 26, 2013</b>
 </p>
 
 <h2>Then</h2>
+
 <p>
     The following HTTP <code>GET</code> request to Yahoo is made
-    <pre>
-GET http://query.yahooapis.com/v1/public/yql?q=select+*+from+yahoo.finance.historicaldata+where+symbol+%3D+%22AMZN%22+and+startDate+%3D+%222013-03-26%22+and+endDate+%3D+%222013-03-26%22&amp;format=json&amp;env=store://datatables.org/alltableswithkeys HTTP/1.1
-Host: query.yahooapis.com
-Proxy-Connection: Keep-Alive
+    <pre concordion:assertEquals="getPriceFromYahoo(#symbol, #date)">
+GET /v1/public/yql?q=select+*+from+yahoo.finance.historicaldata+where+symbol+%3D+%22AMZN%22+and+startDate+%3D+%222013-03-26%22+and+endDate+%3D+%222013-03-26%22&amp;format=json&amp;env=store://datatables.org/alltableswithkeys
+Host: localhost:8001
 User-Agent: Apache-HttpClient/4.2.2 (java 1.5)
+Connection: Keep-Alive
     </pre>
 </p>
 
