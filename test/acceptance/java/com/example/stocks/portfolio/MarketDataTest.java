@@ -2,7 +2,6 @@ package com.example.stocks.portfolio;
 
 import com.example.stocks.CopyResourcesToOutputFolder;
 import com.example.stocks.core.MarketData;
-import com.example.stocks.core.Money;
 import com.example.stocks.core.Portfolio;
 import com.example.stocks.core.StubBook;
 import org.concordion.api.ExpectedToPass;
@@ -33,8 +32,8 @@ public class MarketDataTest {
     public MultiValueResult verifySymbolCheckedWas(final String firstSymbol, final String secondSymbol) {
         book.add(fromSymbol(firstSymbol)).add(fromSymbol(secondSymbol));
         context.checking(new Expectations() {{
-            oneOf(marketData).getPrice(fromSymbol(firstSymbol)); will(returnValue(new Money(100)));
-            oneOf(marketData).getPrice(fromSymbol(secondSymbol)); will(returnValue(new Money(200)));
+            oneOf(marketData).getPrice(fromSymbol(firstSymbol));
+            oneOf(marketData).getPrice(fromSymbol(secondSymbol));
         }});
         portfolio.value();
         context.assertIsSatisfied();

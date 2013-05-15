@@ -13,7 +13,18 @@ public class MoneyTest {
     }
 
     @Test
-    public void supportsScalarMuliplication() {
+    public void supportsAdditionOfNull() {
+        assertThat(new Money(6).add(null), is(new Money(6)));
+    }
+
+    @Test
+    public void supportsScalarMultiplication() {
         assertThat(new Money(7).multiply(9), is(new Money(63)));
     }
+
+    @Test
+    public void supportsNullMultiplicand() {
+        assertThat(new Money(7).multiply(null), is(new Money(7)));
+    }
+
 }

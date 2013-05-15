@@ -19,10 +19,14 @@ public class Money implements Comparable<Money> {
     }
 
     public Money add(Money money) {
+        if (money == null)
+            return this;
         return new Money(amount.add(money.amount));
     }
 
     public Money multiply(Integer scalar) {
+        if (scalar == null)
+            return this;
         return new Money(amount.multiply(new BigDecimal(scalar)));
     }
 
