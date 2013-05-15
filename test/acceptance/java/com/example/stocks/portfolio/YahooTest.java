@@ -1,14 +1,19 @@
 package com.example.stocks.portfolio;
 
+import com.example.stocks.CopyResourcesToOutputFolder;
 import com.example.stocks.core.FakeYahoo;
 import com.example.stocks.core.FrozenClock;
 import com.example.stocks.core.MarketData;
+import com.example.stocks.infrastructure.Clock;
 import com.example.stocks.infrastructure.WiremockLoggedRequest;
+import com.example.stocks.infrastructure.yahoo.Yahoo;
 import com.example.stocks.infrastructure.yahoo.YahooMarketData;
 import com.example.stocks.infrastructure.yahoo.YqlWebService;
 import com.example.stocks.util.Date;
 import com.github.tomakehurst.wiremock.verification.LoggedRequest;
 import org.concordion.api.ExpectedToPass;
+import org.concordion.api.extension.ConcordionExtension;
+import org.concordion.api.extension.Extension;
 import org.concordion.integration.junit4.ConcordionRunner;
 import org.junit.After;
 import org.junit.Before;
@@ -26,15 +31,19 @@ import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 @ExpectedToPass
 public class YahooTest {
 
+    @Extension public ConcordionExtension extension = new CopyResourcesToOutputFolder(this.getClass());
+
+    private Date date;
     private final FakeYahoo yahoo = new FakeYahoo();
     private final String host = "http://localhost:" + FakeYahoo.port;
-    private Date date;
-    private final MarketData marketData = new YahooMarketData(new YqlWebService(anApacheClient(), host), new FrozenClock(date) {
+    private final Yahoo client = new YqlWebService(anApacheClient(), host);
+    private final Clock clock = new FrozenClock(date) {
         @Override
         public Date now() {
             return date;
         }
-    });
+    };
+    private final MarketData marketData = new YahooMarketData(client, clock);
 
     @Before
     public void start() {
