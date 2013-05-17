@@ -10,7 +10,7 @@ body {
 
 body>header {
 	background-color: #333;
-	color: #ccc;	
+	color: #ccc;
 }
 
 body>header>h1 {
@@ -79,14 +79,7 @@ body>header>h1 {
 	font-weight: bold;
 }
 
-.down:before {
-	content: "\2193";
-	display: inline;
-}
-
-.up:before {
-	content: "\2191";
-	display: inline;
+.noMovement {
 }
 
 form {
