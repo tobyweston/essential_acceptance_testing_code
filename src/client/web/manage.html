@@ -2,12 +2,10 @@
 <html>
 <head>
     <title>Manage Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <style>
-        body {
-            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-        }
-    </style>
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet" media="screen">
     <script src="jquery-1.9.1.js"></script>
     <script src="jquery-number-2.1.0.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -17,17 +15,24 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container-fluid">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
             <a class="brand" href="index.html">Stock Portfolio</a>
-            <ul class="nav">
-                <li><a id="navigate-to-summary" href="index.html">Summary</a></li>
-                <li class="active"><a id="navigate-to-management"href="manage.html">Manage</a></li>
-            </ul>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li><a id="navigate-to-summary" href="index.html">Summary</a></li>
+                    <li class="active"><a id="navigate-to-management"href="manage.html">Manage</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
 
 <div class="container-fluid">
-    <p class="lead">Manage your portfolio</p>
+    <p class="lead">Manage your portfolio<a class="btn btn-link pull-right" href=""><i class="icon-repeat"></i> refresh</a></p>
 
     <p>
         Buy and sell stocks.
