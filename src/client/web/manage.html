@@ -9,7 +9,12 @@
     <link href="style.css" rel="stylesheet" media="screen">
     <style>
         body {
-            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar (doesn't work with responsive design*/
+            padding-top: 60px;
+        }
+        @media (max-width: 980px) {
+            body {
+                padding-top: 0;
+            }
         }
     </style>
     <script src="jquery-1.9.1.js"></script>
