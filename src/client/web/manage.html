@@ -57,7 +57,7 @@
             <td>267.74</td>
             <td class="down">-9.54</td>
             <td>26,774.00</td>
-            <td><span class="btn-group"><a class="btn btn-mini"><i class="icon-plus"></i></a><a class="btn btn-mini"><i class="icon-minus"></i></a></span></td>
+            <td><span class="btn-group"><a class="btn btn-mini" role="button" data-toggle="modal" data-target="#buy-modal"><i class="icon-plus"></i></a><a class="btn btn-mini" role="button" data-toggle="modal" data-target="#sell-modal"><i class="icon-minus"></i></a></span></td>
         </tr>
         <tr>
             <td class=name>Apple Inc. <span class="info">AAPL, Apr 23, 4:00PM</span></td>
@@ -76,6 +76,48 @@
             <td><span class="btn-group"><a class="btn btn-mini"><i class="icon-plus"></i></a><a class="btn btn-mini"><i class="icon-minus"></i></a></span></td>
         </tr>
     </table>
+</div>
+
+<div id="buy-modal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="buy-modal-label" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 id="buy-modal-label">Buy</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label input-mini" for="numberOfStocksToBuy">Number of stocks</label>
+                <div class="controls">
+                    <input type="number" id="numberOfStocksToBuy">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-primary">Buy</button>
+    </div>
+</div>
+
+<div id="sell-modal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="sell-modal-label" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 id="sell-modal-label">Sell</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label input-mini" for="numberOfStocksToSell">Number of stocks</label>
+                <div class="controls">
+                    <input type="number" id="numberOfStocksToSell">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-primary">Sell</button>
+    </div>
 </div>
 
 </body>
