@@ -50,7 +50,7 @@ public class PortfolioSystemTest {
         public void shouldRetrieveValuation() throws TimeoutException, InterruptedException {
             String response = "{\"query\":{\"results\":{\"quote\":{\"Close\":\"200.10\"}}}}";
             fakeYahoo.stub(urlStartingWith("/v1/public/yql"), aResponse().withBody(response));
-            browser.navigateToSummaryPage().requestValuationForShares(100).assertThatPortfolioValue(is("400.20"));
+            browser.navigateToSummaryPage().refreshValuation().assertThatPortfolioValue(is("400.20"));
         }
 
         private void stopServers() {
@@ -80,7 +80,7 @@ public class PortfolioSystemTest {
 
         @Test
         public void shouldRetrieveValuation() throws MalformedURLException, InterruptedException {
-            browser.navigateToSummaryPage().requestValuationForShares(100).assertThatPortfolioValue(is("903.83"));
+            browser.navigateToSummaryPage().refreshValuation().assertThatPortfolioValue(is("903.83"));
         }
 
         @After

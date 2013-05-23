@@ -43,7 +43,13 @@
 </div>
 
 <div class="container-fluid">
-    <p class="lead">Portfolio summary <a class="btn btn-link pull-right" href=""><i class="icon-repeat"></i> refresh</a></p>
+
+    <div id="alert-error-container" class="alert alert-error hidden">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <p id="alert-error-message"></p>
+    </div>
+
+    <p class="lead">Portfolio summary <a id="refresh-valuation" class="btn btn-link pull-right" href="#"><i class="icon-repeat"></i> refresh</a></p>
 
     <table class="table table-striped">
         <thead>
@@ -55,70 +61,50 @@
                 <td>Total</td>
             </tr>
         </thead>
-        <tr>
-            <td class=name>Amazon.com Inc. <span class="info">AMZN, Yesterday</span></td>
-            <td>100</td>
-            <td>267.74</td>
-            <td class="down">-9.54</td>
-            <td>26,774.00</td>
-        </tr>
-        <tr>
-            <td class=name>Apple Inc. <span class="info">AAPL, Apr 23, 4:00PM</span></td>
-            <td>33</td>
-            <td>406.13</td>
-            <td class="up">1.64</td>
-            <td>13,402.29</td>
-        </tr>
-        <tr>
-            <td class=name>Yahoo! Inc. <span class="info">YHOO, Apr 23, 4:00PM</span></td>
-            <td>120</td>
-            <td>24.38</td>
-            <td class="noMovement">-</td>
-            <td>2,925.60</td>
-        </tr>
-        <tr>
-            <td id="grandtotal" colspan="5">43,101.89</td>
-        </tr>
+        <tbody>
+            <tr>
+                <td class=name>Amazon.com Inc. <span class="info">AMZN, Yesterday</span></td>
+                <td>100</td>
+                <td>267.74</td>
+                <td class="down">-9.54</td>
+                <td>26,774.00</td>
+            </tr>
+            <tr>
+                <td class=name>Apple Inc. <span class="info">AAPL, Apr 23, 4:00PM</span></td>
+                <td>33</td>
+                <td>406.13</td>
+                <td class="up">1.64</td>
+                <td>13,402.29</td>
+            </tr>
+            <tr>
+                <td class=name>Yahoo! Inc. <span class="info">YHOO, Apr 23, 4:00PM</span></td>
+                <td>120</td>
+                <td>24.38</td>
+                <td class="noMovement">-</td>
+                <td>2,925.60</td>
+            </tr>
+            <tr>
+                <td id="grand-total" colspan="5">43,101.89</td>
+            </tr>
+        </tbody>
     </table>
 
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <form id="requestValuationForm" class="form-inline">
-        <legend>Your Portfolio</legend>
-
-        <label class="control-label" for="inputNumberOfShares">Number of shares</label>
-        <input id="inputNumberOfShares" type="text" placeholder="10">
-        <label id="requestValuationResult" class="lead pull-right"></label>
-    </form>
-    <button onclick="requestValuation();" id="requestValuation" class="btn btn-primary btn-large">Request valuation
-    </button>
-    <div>
-        <p style="margin-top:30px" id="requestValuationError" class="muted"></p>
-    </div>
 </div>
 
 <script type="text/javascript">
-    $('#requestValuationForm').on('submit', function (e) {
-        requestValuation();
-    });
-</script>
-
-<script type="text/javascript">
-    function requestValuation() {
+    $('a#refresh-valuation').click(function (event) {
         $.ajax({
             url: "http://localhost:8000/portfolio/0001",
             success: function (data) {
-                $('#requestValuationResult').html($.number(data, 2));
+                $('#grand-total').html($.number(data, 2));
             },
             error: function (XMLHttpRequest, textStatus, error) {
                 console.log('Error GET portfolio/? ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
-                $('#requestValuationError').html('Error: ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
+                $('#alert-error-message').html('<strong>Error</strong> ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
+                $('#alert-error-container').removeClass("hidden")
             }
         });
-    }
+    });
 </script>
 
 </body>

@@ -37,7 +37,7 @@ public class FakeHttpServer implements HttpServer {
         stubFor(get(urlMatchingStrategy).willReturn(response));
     }
 
-    public void verify(UrlMatchingStrategy url) throws InterruptedException {
+    public void verify(UrlMatchingStrategy url) throws InterruptedException, AssertionError {
         waitFor(assertion(verificationOf(url), is(true)), timeout(millis(500)));
     }
 

@@ -12,8 +12,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 
-import java.net.MalformedURLException;
-
 import static com.example.stocks.infrastructure.UrlMatchingStrategies.urlEndingWith;
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 
@@ -33,9 +31,9 @@ public class UiPortfolioValueDisplayTest {
         application.start();
     }
 
-    public void requestPortfolioValue(String headerName, String headerValue, String body) throws MalformedURLException {
+    public void requestPortfolioValue(String headerName, String headerValue, String body) {
         application.stub(urlEndingWith("/portfolio/0001"), aResponse().withHeader(headerName, headerValue).withBody(body));
-        browser.navigateToSummaryPage().requestValuationForShares(100);
+        browser.navigateToSummaryPage().refreshValuation();
     }
 
     public String getPortfolioValue() throws InterruptedException {

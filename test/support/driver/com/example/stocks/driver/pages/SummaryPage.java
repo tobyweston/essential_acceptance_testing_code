@@ -31,9 +31,8 @@ public class SummaryPage implements NavigablePage {
         this.driver = driver;
     }
 
-    public SummaryPage requestValuationForShares(Integer numberOfShares) {
-        driver.findElement(By.id("inputNumberOfShares")).sendKeys(numberOfShares.toString());
-        driver.findElement(By.id("requestValuation")).click();
+    public SummaryPage refreshValuation() {
+        driver.findElement(By.id("refresh-valuation")).click();
         return this;
     }
 
@@ -81,7 +80,7 @@ public class SummaryPage implements NavigablePage {
             return new ProbeFor<String>() {
                 @Override
                 public String call() throws RuntimeException {
-                    return driver.findElement(By.id("requestValuationResult")).getText();
+                    return driver.findElement(By.id("grand-total")).getText();
                 }
 
                 @Override
@@ -95,7 +94,7 @@ public class SummaryPage implements NavigablePage {
             return new ProbeFor<String>() {
                 @Override
                 public String call() throws RuntimeException {
-                    return driver.findElement(By.id("requestValuationError")).getText();
+                    return driver.findElement(By.id("alert-error-message")).getText();
                 }
 
                 @Override
