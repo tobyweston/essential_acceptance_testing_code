@@ -28,7 +28,8 @@ public class UiServer implements HttpServer {
                 .set("otf", "application/octet-stream")
                 .set("eot", "application/octet-stream")
                 .set("ttf", "application/octet-stream")
-                .set("woff", "application/octet-stream");
+                .set("woff", "application/octet-stream")
+                .path(EMPTY);
             Application application = application().content(defaultPackageUrl(getClass()), EMPTY).add(bindings(extensions)).build();
             ServerConfiguration configuration = defaultConfiguration().port(port);
             server = new RestServer(application, configuration);
