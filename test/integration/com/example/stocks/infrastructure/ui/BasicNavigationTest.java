@@ -36,11 +36,12 @@ public class BasicNavigationTest {
 
     @Test
     public void canTrustBrowserObjectToRetainContextAllowingFlexibleNavigation() throws InterruptedException {
+        String defaultGrandTotalInUi = "43,101.89";
         browser.navigateToManagementPage().sell();
         browser.navigateToSummaryPage().getPortfolioValue();
         browser.navigateToManagementPage().sell();
         browser.navigateToSummaryPage().getPortfolioValue();
-        browser.navigateToManagementPage().sell().navigateToSummaryPage().assertThatPortfolioValue(is("")).navigateToManagementPage().buy();
+        browser.navigateToManagementPage().sell().navigateToSummaryPage().assertThatPortfolioValue(is(defaultGrandTotalInUi)).navigateToManagementPage().buy();
     }
 
     @After
