@@ -67,5 +67,8 @@ public class FakeHttpServer implements HttpServer {
         server.stub(urlEndingWith("/portfolio/0001"), aResponse()
                 .withHeader("Access-Control-Allow-Origin", "*")
                 .withBody("10999.99"));
+        server.stub(urlEndingWith("/portfolio/0002"), aResponse()
+                .withHeader("Access-Control-Allow-Origin", "*")
+                .withStatus(404));
     }
 }

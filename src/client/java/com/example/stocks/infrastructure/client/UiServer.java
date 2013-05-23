@@ -25,10 +25,10 @@ public class UiServer implements HttpServer {
     public void start() {
         try {
             StaticBindingBuilder extensions = new StaticBindingBuilder(defaultPackageUrl(getClass()))
-                .set("otf", "application/octet-stream")
-                .set("eot", "application/octet-stream")
-                .set("ttf", "application/octet-stream")
-                .set("woff", "application/octet-stream")
+                .set("otf", "application/otf")
+                .set("eot", "application/vnd.ms-fontobject")
+                .set("ttf", "font/ttf")
+                .set("woff", "application/x-font-woff")
                 .path(EMPTY);
             Application application = application().content(defaultPackageUrl(getClass()), EMPTY).add(bindings(extensions)).build();
             ServerConfiguration configuration = defaultConfiguration().port(port);

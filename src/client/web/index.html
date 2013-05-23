@@ -99,8 +99,14 @@
                 $('#grand-total').html($.number(data, 2));
             },
             error: function (XMLHttpRequest, textStatus, error) {
-                console.log('Error GET portfolio/? ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
-                $('#alert-error-message').html('<strong>Failed to refresh prices</strong>, reported error was ' + XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
+                var status = XMLHttpRequest.status;
+                var message = '<strong>Failed to refresh prices</strong>';
+                if (status === 0)
+                    message += ', unable to access the stock valuation server at <a href=\"' + this.url + '\">' + this.url + '</a>';
+                else
+                    message += ', reported HTTP error was ' + status + ' (' + error + ') ' + XMLHttpRequest.responseText;
+                console.log(message);
+                $('#alert-error-message').html(message);
                 $('#alert-error-container').removeClass("hidden")
             }
         });
