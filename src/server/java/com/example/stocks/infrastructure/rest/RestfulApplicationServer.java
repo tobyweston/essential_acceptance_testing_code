@@ -33,7 +33,7 @@ public class RestfulApplicationServer implements HttpServer {
     public void start() {
         try {
             Application application = application()
-                    .add(new ValuationFeature(portfolio))
+                    .add(new ValuationModule(portfolio))
                     .add(annotatedClass(Version.class))
                     .build();
             ServerConfiguration configuration = defaultConfiguration().port(port);
@@ -52,11 +52,11 @@ public class RestfulApplicationServer implements HttpServer {
         }
     }
 
-    private static class ValuationFeature implements ResourcesModule, ApplicationScopedModule {
+    private static class ValuationModule implements ResourcesModule, ApplicationScopedModule {
 
         private final PortfolioBuilder portfolio;
 
-        private ValuationFeature(PortfolioBuilder portfolio) {
+        private ValuationModule(PortfolioBuilder portfolio) {
             this.portfolio = portfolio;
         }
 
