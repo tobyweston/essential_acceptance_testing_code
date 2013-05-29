@@ -8,6 +8,7 @@ import org.concordion.api.ExpectedToPass;
 import org.concordion.api.extension.ConcordionExtension;
 import org.concordion.api.extension.Extension;
 import org.concordion.integration.junit4.ConcordionRunner;
+import org.hamcrest.Matcher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -53,8 +54,12 @@ public class UiPortfolioValueRequestTest {
     }
 
     public boolean verifyResponseReturned() throws InterruptedException {
-        browser.navigateToSummaryPage().assertThatPortfolioValue(not(isEmptyOrNullString()));
+        browser.navigateToSummaryPage().assertThatPortfolioValue(isRenderedInTheUi());
         return true;
+    }
+
+    private static Matcher<String> isRenderedInTheUi() {
+        return not(isEmptyOrNullString());
     }
 
     @After
